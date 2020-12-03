@@ -1,0 +1,15 @@
+{
+  "name": "pi/ratepay",
+  "description": "Ratepay",
+  "type": "oxideshop-module",
+  "keywords": ["oxid", "modules", "eShop", "payment"],
+  "homepage": "https://www.ratepay.com/",
+  "license": [
+    "LGPL-3.0-only"
+  ],
+  "extra": {
+    "oxideshop": {
+      "target-directory": "pi/ratepay"
+    }
+  }
+}
