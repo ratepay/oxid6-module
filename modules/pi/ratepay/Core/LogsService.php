@@ -72,7 +72,7 @@ class LogsService extends Base
      * @param string $surname
      * @param object $trans
      *
-     * @return mixed pi_ratepay_Logs or null
+     * @return mixed Logs or null
      */
     public function logRatepayTransaction($orderId, $transactionId, $paymentMethod, $paymentType, $paymentSubtype, $name, $surname, $trans)
     {

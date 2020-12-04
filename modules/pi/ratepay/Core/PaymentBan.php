@@ -16,7 +16,7 @@ use OxidEsales\Eshop\Core\Model\BaseModel;
  * GNU General Public License for more details.
  *
  * @category  pi_ratepay_core
- * @package   pi_ratepay
+ * @package   ratepay
  * @copyright (C) 2020 Fatchip GmbH  <http://www.fatchip.de/>
  * @license	http://www.gnu.org/licenses/  GNU General Public License 3
  */

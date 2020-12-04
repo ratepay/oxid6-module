@@ -128,7 +128,7 @@ class PaymentGateway extends PaymentGateway_parent
                 $this->getSession()->setVariable('pi_ratepay_denied', 'denied');
             }
             $this->getSession()->setVariable($this->_paymentId . '_error_id', $this->paymentMethodIds[$this->_paymentId]['denied']);
-            Registry::getUtils()->redirect($this->getConfig()->getSslShopUrl() . 'index.php?cl=payment', false);
+            Registry::getUtils()->redirect($this->getConfig()->getSslShopUrl() . 'index.php?cl=RatepayPayment', false);
         }
 
         $transactionId = (string)$payInit->getTransactionId();
@@ -191,7 +191,7 @@ class PaymentGateway extends PaymentGateway_parent
             // OX-19: delete order if payment failed
             $oOrder->delete();
 
-            Registry::getUtils()->redirect($this->getConfig()->getSslShopUrl() . 'index.php?cl=payment', false);
+            Registry::getUtils()->redirect($this->getConfig()->getSslShopUrl() . 'index.php?cl=RatepayPayment', false);
         }
         $this->getSession()->setVariable($this->_paymentId . '_descriptor', $payRequest->getDescriptor());
 

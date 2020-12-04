@@ -63,7 +63,7 @@ function piRatepayRateCalculatorAction(mode, paymentMethod, month) {
         calcMethod = 'calculation-by-time';
     }
 
-    xmlhttp.open("POST", pi_ratepay_rate_calc_path + "php/PiRatepayRateCalcRequest.php", false);
+    xmlhttp.open("POST", pi_ratepay_rate_calc_path + "Php/PiRatepayRateCalcRequest.php", false);
 
     xmlhttp.setRequestHeader("Content-Type",
         "application/x-www-form-urlencoded");
@@ -119,7 +119,7 @@ function piLoadrateCalculator(paymentMethod) {
         shop = document.getElementsByName("shp")[0].value;
     }
 
-    xmlhttp.open("POST", pi_ratepay_rate_calc_path + "php/PiRatepayRateCalcDesign.php", false);
+    xmlhttp.open("POST", pi_ratepay_rate_calc_path + "Php/PiRatepayRateCalcDesign.php", false);
 
     xmlhttp.setRequestHeader("Content-Type",
         "application/x-www-form-urlencoded");
@@ -147,7 +147,7 @@ function piLoadrateResult(paymentMethod) {
         shop = document.getElementsByName("shp")[0].value;
     }
     
-    xmlhttp.open("POST", pi_ratepay_rate_calc_path + "php/PiRatepayRateCalcRequest.php", false);
+    xmlhttp.open("POST", pi_ratepay_rate_calc_path + "Php/PiRatepayRateCalcRequest.php", false);
 
     xmlhttp.setRequestHeader("Content-Type",
         "application/x-www-form-urlencoded");

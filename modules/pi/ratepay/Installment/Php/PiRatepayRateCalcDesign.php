@@ -10,7 +10,7 @@
     require_once 'PiRatepayRateCalc.php';
     require_once 'path.php';
 
-    $pi_calculator = oxNew(\pi\ratepay\Installment\Php\PiRatepayRateCalc::class);
+    $pi_calculator = new \pi\ratepay\Installment\Php\PiRatepayRateCalc();
 
     $pi_calculator->unsetData();
     $pi_monthAllowed = $pi_calculator->getRatepayRateMonthAllowed();

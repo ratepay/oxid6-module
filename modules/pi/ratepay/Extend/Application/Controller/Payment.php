@@ -375,7 +375,7 @@ class Payment extends Payment_parent
             foreach ($isValid as $validationValue) {
                 if (!$validationValue) {
                     $this->getSession()->setVariable($paymentId . '_errors', array_unique($this->_errors));
-                    Registry::getUtils()->redirect($this->getConfig()->getSslShopUrl() . 'index.php?cl=payment', false);
+                    Registry::getUtils()->redirect($this->getConfig()->getSslShopUrl() . 'index.php?cl=RatepayPayment', false);
                 }
             }
         }

@@ -61,7 +61,7 @@ class ModuleConfig extends ModuleConfig_parent
     public function piIsRatepayModuleConfig()
     {
         $blIsRatepayModuleConfig =
-            ($this->_sModuleId == 'pi_ratepay');
+            ($this->_sModuleId == 'ratepay');
 
         return $blIsRatepayModuleConfig;
     }

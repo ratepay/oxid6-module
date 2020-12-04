@@ -75,11 +75,11 @@
         [{/if}]
 
         <br/>
-        <link type="text/css" rel="stylesheet" href="modules/pi/ratepay/installment/css/style.css"/>
-        <script type="text/javascript" src="[{$oViewConf->getModuleUrl('pi_ratepay')}]installment/js/path.js"></script>
-        <script type="text/javascript" src="[{$oViewConf->getModuleUrl('pi_ratepay')}]installment/js/layout.js"></script>
-        <script type="text/javascript" src="[{$oViewConf->getModuleUrl('pi_ratepay')}]installment/js/ajax.js"></script>
-        <script type="text/javascript" src="[{$oViewConf->getModuleUrl('pi_ratepay')}]installment/js/mouseaction.js"></script>
+        <link type="text/css" rel="stylesheet" href="modules/pi/ratepay/Installment/css/style.css"/>
+        <script type="text/javascript" src="[{$oViewConf->getModuleUrl('ratepay')}]Installment/js/path.js"></script>
+        <script type="text/javascript" src="[{$oViewConf->getModuleUrl('ratepay')}]Installment/js/layout.js"></script>
+        <script type="text/javascript" src="[{$oViewConf->getModuleUrl('ratepay')}]Installment/js/ajax.js"></script>
+        <script type="text/javascript" src="[{$oViewConf->getModuleUrl('ratepay')}]Installment/js/mouseaction.js"></script>
         [{if $pierror == "-461"}]
         <div class="alert alert-danger">
             [{oxmultilang ident="PI_RATEPAY_RATE0_ERROR_CALCULATE_TO_PROCEED"}]

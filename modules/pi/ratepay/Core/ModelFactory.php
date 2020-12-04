@@ -627,7 +627,7 @@ class ModelFactory extends Base
         $head = $this->_getHead();
         $rb = oxNew(RequestBuilder::class, $this->_sandbox);
         $paymentInit = $rb->callPaymentInit($head);
-        pi_ratepay_LogsService::getInstance()->logRatepayTransaction($this->getOrderNumber(), '', $this->_paymentType, 'PAYMENT_INIT', '', $this->getUser()->oxuser__oxfname->value, $this->getUser()->oxuser__oxlname->value, $paymentInit);
+        LogsService::getInstance()->logRatepayTransaction($this->getOrderNumber(), '', $this->_paymentType, 'PAYMENT_INIT', '', $this->getUser()->oxuser__oxfname->value, $this->getUser()->oxuser__oxlname->value, $paymentInit);
         return $paymentInit;
     }
 

@@ -263,11 +263,11 @@ class PiRatepayRateCalcData implements PiRatepayRateCalcDataInterface
     public function getData()
     {
         $array = array(
-            'total_amount'           => Registry::getSession()->getVariable($this->paymentMethod . '_rate_total_amount'),
-            'amount'                 => Registry::getSession()->getVariable($this->paymentMethod . '_rate_amount'),
-            'interest_rate'          => Registry::getSession()->getVariable($this->paymentMethod . '_rate_interest_rate'),
-            'interest_amount'        => Registry::getSession()->getVariable($this->paymentMethod . '_rate_interest_amount'),
-            'service_charge'         => Registry::getSession()->getVariable($this->paymentMethod . '_rate_service_charge'),
+            'total_amount'           => Registry::getSession()->getVariable($this->paymentMethod . '_total_amount'),
+            'amount'                 => Registry::getSession()->getVariable($this->paymentMethod . '_amount'),
+            'interest_rate'          => Registry::getSession()->getVariable($this->paymentMethod . '_interest_rate'),
+            'interest_amount'        => Registry::getSession()->getVariable($this->paymentMethod . '_interest_amount'),
+            'service_charge'         => Registry::getSession()->getVariable($this->paymentMethod . '_service_charge'),
             'annual_percentage_rate' => Registry::getSession()->getVariable($this->paymentMethod . '_annual_percentage_rate'),
             'monthly_debit_interest' => Registry::getSession()->getVariable($this->paymentMethod . '_monthly_debit_interest'),
             'number_of_rates'        => Registry::getSession()->getVariable($this->paymentMethod . '_number_of_rates'),

@@ -10,7 +10,7 @@
     require_once 'PiRatepayRateCalc.php';
     require_once 'path.php';
 
-    $pi_calculator = new PiRatepayRateCalc();
+    $pi_calculator = new \pi\ratepay\Installment\Php\PiRatepayRateCalc();
     $calcValue = $pi_calculator->getPostParameter('calcValue');
     $calcMethod = $pi_calculator->getPostParameter('calcMethod');
     $bankAccount = $pi_calculator->getPostParameter('bankAccount');
@@ -109,11 +109,11 @@
                     <div colspan="2" class="small text-right">
                         <a class="rp-link" id="<?php echo $sPaymentMethod; ?>_rp-show-installment-plan-details" onclick="changeDetails('<?php echo $sPaymentMethod; ?>')">
                             Zeige Details
-                            <img src="modules/pi/ratepay/installment/resources/icon-enlarge.png" class="rp-details-icon" />
+                            <img src="modules/pi/ratepay/Installment/resources/icon-enlarge.png" class="rp-details-icon" />
                         </a>
                         <a class="rp-link" id="<?php echo $sPaymentMethod; ?>_rp-hide-installment-plan-details" onclick="changeDetails('<?php echo $sPaymentMethod; ?>')">
                             Schließe Details
-                            <img src="modules/pi/ratepay/installment/resources/icon-shrink.png" class="rp-details-icon" />
+                            <img src="modules/pi/ratepay/Installment/resources/icon-shrink.png" class="rp-details-icon" />
                         </a>
                     </div>
                 </div>

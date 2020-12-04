@@ -83,7 +83,7 @@
                         [{oxmultilang ident="PI_RATEPAY_PROFILE_LIMIT_MIN"}]&nbsp;
                     </td>
                     <td class="edittext">
-                        [{$edit->pi_ratepay_settings__result_limit_min->value}]
+                        [{$edit->pi_ratepay_settings__limit_min->value}]
                     </td>
                 </tr>
                 <tr>

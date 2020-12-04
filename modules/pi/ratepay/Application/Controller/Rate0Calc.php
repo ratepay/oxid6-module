@@ -130,12 +130,12 @@ class Rate0Calc extends FrontendController
 
         if ($checking) {
             Registry::getUtils()->redirect(
-                $myConfig->getShopHomeURL() . 'cl=order'
+                $myConfig->getShopHomeURL() . 'cl=RatepayOrder'
             );
         } else {
             Registry::getUtils()->redirect(
                 $myConfig->getShopHomeURL()
-                . 'cl=pi_ratepay_rate_calc&fnc=calculateError'
+                . 'cl=RatepayRateCalc&fnc=calculateError'
             );
         }
     }
