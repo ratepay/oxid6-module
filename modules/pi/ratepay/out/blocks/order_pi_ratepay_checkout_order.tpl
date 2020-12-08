@@ -40,7 +40,7 @@
             <p>Bitte warten, Ihre Anfrage wird gerade &uuml;berpr&uuml;ft. Schlie&szlig;en Sie diese Seite nicht und klicken Sie nicht "Reload" bis die &Uuml;berpr&uuml;fung abgeschlossen ist. Dies wird ca. 10 Sekunden dauern.</p>
             <center><img class="waitIMG" src="[{$oViewConf->getModuleUrl('ratepay')}]out/admin/img/ajax-loader.gif" alt="wait"/></center>
         </div>
-        <a href="[{ $oViewConf->getSslSelfLink() }]cl=RatepayPayment" class="submitButton largeButton">[{ oxmultilang ident="PREVIOUS_STEP" }]</a>
+        <a href="[{ $oViewConf->getSslSelfLink() }]cl=Payment" class="submitButton largeButton">[{ oxmultilang ident="PREVIOUS_STEP" }]</a>
         <button type="submit" class="submitButton nextStep largeButton"  onClick="showWaitingWheel()">[{ oxmultilang ident="SUBMIT_ORDER" }]</button>
     </div>
 </form>

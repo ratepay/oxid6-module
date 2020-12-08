@@ -48,7 +48,7 @@
     <input type="hidden" name="cl" value="RatepayRate0Calc">
     <input type="hidden" name="fnc" value="check">
     <div class="lineBox clear">
-        <a href="[{ $oViewConf->getSslSelfLink() }]cl=RatepayPayment" class="submitButton largeButton" id="paymentBackStepBottom">[{ oxmultilang ident="PREVIOUS_STEP" }]</a>
+        <a href="[{ $oViewConf->getSslSelfLink() }]cl=Payment" class="submitButton largeButton" id="paymentBackStepBottom">[{ oxmultilang ident="PREVIOUS_STEP" }]</a>
         <button type="submit" name="userform" class="submitButton nextStep largeButton" id="paymentNextStepBottom">[{ oxmultilang ident="CONTINUE_TO_NEXT_STEP" }]</button>
     </div>
 
