@@ -51,9 +51,6 @@ $aModule = array(
         // Extend model
         \OxidEsales\Eshop\Application\Model\Order::class => \pi\ratepay\Extend\Application\Model\Oxorder::class,
         \OxidEsales\Eshop\Application\Model\PaymentGateway::class => \pi\ratepay\Extend\Application\Model\PaymentGateway::class,
-
-        // Extend Core
-        \OxidEsales\Eshop\Core\ShopControl::class => \pi\ratepay\Extend\Core\ShopControl::class
     ),
     'controllers' => array (
         'RatepayAdminListBase' => \pi\ratepay\Application\Controller\Admin\AdminListBase::class,
