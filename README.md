@@ -1,7 +1,7 @@
-# RatePAY GmbH - OXID Payment Module
+# Ratepay GmbH - OXID6 Payment Module
 ============================================
 
-|Module | RatePAY Payment Module for OXID
+|Module | Ratepay Payment Module for OXID6
 |------|----------
 |Author | `Fatchip GmbH`
 |Prefix | `pi`
