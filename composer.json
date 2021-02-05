@@ -4,6 +4,7 @@
   "type": "oxideshop-module",
   "keywords": ["oxid", "modules", "eShop", "payment"],
   "homepage": "https://www.ratepay.com/",
+  "version": "6.0.0",
   "license": "MIT",
   "extra": {
     "oxideshop": {
