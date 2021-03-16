@@ -6,7 +6,7 @@ use OxidEsales\Eshop\Application\Model\Basket;
 use OxidEsales\Eshop\Application\Model\UserPayment;
 use OxidEsales\Eshop\Core\Counter;
 
-class Oxorder extends Oxorder_parent
+class RatepayOxorder extends RatepayOxorder_parent
 {
     /**
      * OX-19: Fix empty ordernr during Ratepay payment

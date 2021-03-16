@@ -29,7 +29,7 @@ use OxidEsales\Eshop\Core\Registry;
  * @package PayIntelligent_RatePAY
  * @extends order
  */
-class Order extends Order_parent
+class RatepayOrder extends RatepayOrder_parent
 {
     /**
      * Check if this is a OXID 4.6.x Shop.

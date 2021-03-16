@@ -7,7 +7,7 @@ use pi\ratepay\Application\Model\Settings;
 use pi\ratepay\Core\ModelFactory;
 use pi\ratepay\Core\Utilities;
 
-class ModuleConfig extends ModuleConfig_parent
+class RatepayModuleConfig extends RatepayModuleConfig_parent
 {
 
     /**

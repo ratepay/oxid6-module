@@ -44,13 +44,13 @@ $aModule = array(
     'url'          => 'http://www.ratepay.com/',
     'extend'      => array(
         // Extend controllers
-        \OxidEsales\Eshop\Application\Controller\Admin\ModuleConfiguration::class => \pi\ratepay\Extend\Application\Controller\Admin\ModuleConfig::class,
-        \OxidEsales\Eshop\Application\Controller\OrderController::class => \pi\ratepay\Extend\Application\Controller\Order::class,
-        \OxidEsales\Eshop\Application\Controller\PaymentController::class => \pi\ratepay\Extend\Application\Controller\Payment::class,
+        \OxidEsales\Eshop\Application\Controller\Admin\ModuleConfiguration::class => \pi\ratepay\Extend\Application\Controller\Admin\RatepayModuleConfig::class,
+        \OxidEsales\Eshop\Application\Controller\OrderController::class => \pi\ratepay\Extend\Application\Controller\RatepayOrder::class,
+        \OxidEsales\Eshop\Application\Controller\PaymentController::class => \pi\ratepay\Extend\Application\Controller\RatepayPayment::class,
 
         // Extend model
-        \OxidEsales\Eshop\Application\Model\Order::class => \pi\ratepay\Extend\Application\Model\Oxorder::class,
-        \OxidEsales\Eshop\Application\Model\PaymentGateway::class => \pi\ratepay\Extend\Application\Model\PaymentGateway::class,
+        \OxidEsales\Eshop\Application\Model\Order::class => \pi\ratepay\Extend\Application\Model\RatepayOxorder::class,
+        \OxidEsales\Eshop\Application\Model\PaymentGateway::class => \pi\ratepay\Extend\Application\Model\RatepayPaymentGateway::class,
     ),
     'controllers' => array (
         'RatepayAdminListBase' => \pi\ratepay\Application\Controller\Admin\AdminListBase::class,
@@ -64,9 +64,9 @@ $aModule = array(
         'RatepayProfileMain' => \pi\ratepay\Application\Controller\Admin\ProfileMain::class,
         'RatepayRate0Calc' => \pi\ratepay\Application\Controller\Rate0Calc::class,
         'RatepayRateCalc' => \pi\ratepay\Application\Controller\RateCalc::class,
-        'RatepayModuleConfig' => \pi\ratepay\Extend\Application\Controller\Admin\ModuleConfig::class,
-        'RatepayOrder' => \pi\ratepay\Extend\Application\Controller\Order::class,
-        'RatepayPayment' => \pi\ratepay\Extend\Application\Controller\Payment::class,
+        'RatepayModuleConfig' => \pi\ratepay\Extend\Application\Controller\Admin\RatepayModuleConfig::class,
+        'RatepayOrder' => \pi\ratepay\Extend\Application\Controller\RatepayOrder::class,
+        'RatepayPayment' => \pi\ratepay\Extend\Application\Controller\RatepayPayment::class,
     ),
     'templates' => array(
         // views->admin

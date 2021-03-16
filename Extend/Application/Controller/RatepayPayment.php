@@ -37,7 +37,7 @@ use pi\ratepay\Extend\Application\Model\Oxorder;
  * @package   PayIntelligent_RatePAY
  * @extends Payment
  */
-class Payment extends Payment_parent
+class RatepayPayment extends RatepayPayment_parent
 {
 
     /**
