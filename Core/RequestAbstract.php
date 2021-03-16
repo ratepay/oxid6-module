@@ -4,7 +4,7 @@ namespace pi\ratepay\Core;
 
 use OxidEsales\Eshop\Core\Base;
 use OxidEsales\EshopCommunity\Core\DatabaseProvider;
-use pi\ratepay\Extend\Application\Model\Oxorder;
+use pi\ratepay\Extend\Application\Model\RatepayOxorder;
 
 /**
  * This program is free software; you can redistribute it and/or modify
@@ -106,7 +106,7 @@ abstract class RequestAbstract extends Base
      */
     public function getDeliveryAddress()
     {
-        $order = oxNew(Oxorder::class);
+        $order = oxNew(RatepayOxorder::class);
         $deliveryAddress = $order->getDelAddressInfo();
 
         if (is_null($deliveryAddress)){
