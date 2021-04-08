@@ -15,7 +15,7 @@ use pi\ratepay\Core\PaymentBan;
 use pi\ratepay\Core\RateDetails;
 use pi\ratepay\Core\Utilities;
 
-class PaymentGateway extends PaymentGateway_parent
+class RatepayPaymentGateway extends RatepayPaymentGateway_parent
 {
     /**
      * Payment type

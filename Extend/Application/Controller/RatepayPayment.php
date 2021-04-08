@@ -26,7 +26,7 @@ use OxidEsales\PayPalModule\Model\Address;
 use pi\ratepay\Application\Model\Settings;
 use pi\ratepay\Core\PaymentBan;
 use pi\ratepay\Core\Utilities;
-use pi\ratepay\Extend\Application\Model\Oxorder;
+use pi\ratepay\Extend\Application\Model\RatepayOxorder;
 
 /**
  * {@inheritdoc}
@@ -37,7 +37,7 @@ use pi\ratepay\Extend\Application\Model\Oxorder;
  * @package   PayIntelligent_RatePAY
  * @extends Payment
  */
-class Payment extends Payment_parent
+class RatepayPayment extends RatepayPayment_parent
 {
 
     /**
@@ -947,7 +947,7 @@ class Payment extends Payment_parent
     {
         if ($this->_oDelAddress === null) {
             $this->_oDelAddress = false;
-            $oOrder = oxNew(Oxorder::class);
+            $oOrder = oxNew(RatepayOxorder::class);
             $this->_oDelAddress = $oOrder->getDelAddressInfo();
         }
         return $this->_oDelAddress;
