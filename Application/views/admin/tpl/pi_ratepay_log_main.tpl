@@ -5,6 +5,10 @@
     [{assign var="readonly" value=""}]
 [{/if}]
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/default.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+<script>hljs.highlightAll();</script>
+
 <script type="text/javascript">
     function fcConfirmationBeforeAction(submitId, submitFunction) {
         var affectedForm = document.getElementById(submitId);
@@ -135,19 +139,19 @@
         <td valign="top" class="edittext vr" align="left">
             <table>
                 <tr>
-                    <td class="edittext">
+                    <td class="edittext" style="font-weight: bold">
                         [{oxmultilang ident="PI_RATEPAY_LOGGING_REQUEST"}]&nbsp;
                     </td>
                     <td class="edittext">
-                        <pre>[{$edit->getFormattedRequest()}]</pre>
+                        <pre><code>[{$edit->getFormattedRequest()}]</code></pre>
                     </td>
                 </tr>
                 <tr>
-                    <td class="edittext">
+                    <td class="edittext" style="font-weight: bold">
                         [{oxmultilang ident="PI_RATEPAY_LOGGING_RESPONSE"}]&nbsp;
                     </td>
                     <td class="edittext">
-                        <pre>[{$edit->getFormattedResponse()}]</pre>
+                        <pre><code>[{$edit->getFormattedResponse()}]</code></pre>
                     </td>
                 </tr>
                 <tr>
