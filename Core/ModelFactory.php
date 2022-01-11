@@ -556,7 +556,8 @@ class ModelFactory extends Base
 
             $this->setSandbox($sSandbox);
         }
-
+        $oModule = oxNew('oxModule');
+        $oModule->load('ratepay');
         $headArray = [
             'SystemId' => $_SERVER['SERVER_ADDR'],
             'Credential' => [
@@ -567,7 +568,7 @@ class ModelFactory extends Base
                 'Systems' => [
                     'System' => [
                         'Name' => 'OXID_' . Registry::getConfig()->getEdition(),
-                        'Version' => Registry::getConfig()->getVersion() . '_' . Utilities::PI_MODULE_VERSION
+                        'Version' => Registry::getConfig()->getVersion() . '_' . $oModule->getInfo('version')
                     ]
                 ]
             ]
