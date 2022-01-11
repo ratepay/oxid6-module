@@ -7,10 +7,10 @@
             </SUBMENU>
         </MAINMENU>
         <MAINMENU id="PI_RATEPAY_RATEPAY">
-            <SUBMENU id="PI_RATEPAY_ADMIN_MENU_PROFILES" cl="RatepayProfile" list="RatepayProfileList">
+            <SUBMENU id="PI_RATEPAY_ADMIN_MENU_PROFILES" cl="ratepayprofile" list="ratepayprofilelist">
                 <TAB id="PI_RATEPAY_PROFILE_DETAILS" cl="RatepayProfileMain" />
             </SUBMENU>
-            <SUBMENU id="PI_RATEPAY_LOGGING" cl="RatepayLog" list="RatepayLogList">
+            <SUBMENU id="PI_RATEPAY_LOGGING" cl="ratepaylog" list="ratepayloglist">
                 <TAB id="PI_RATEPAY_LOGGING_ENTRY" cl="RatepayLogMain" />
             </SUBMENU>
         </MAINMENU>
