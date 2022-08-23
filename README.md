@@ -6,7 +6,7 @@
 |Author | `Fatchip GmbH`
 |Prefix | `pi`
 |Shop Version | `CE/PE` `CE/PE/EE` `6.0.x-6.5.x`
-|Version | `6.1.0`
+|Version | `6.1.1`
 |Link | http://www.ratepay.com
 |Mail | integration@ratepay.com
 |Installation | https://ratepay.gitbook.io/oxid/
@@ -14,6 +14,12 @@
 |Legal Disclaimer|https://ratepay.gitbook.io/docs/#legal-disclaimer
 
 ## Changelog
+
+### Version 6.1.1 - Released 2022-08-23
+* Fixed : Bug when using descriptions for identical order items
+* Fixed : EN translations
+* Update : Data saved in request logs
+* Update : Obsolete param from profile removed
 
 ### Version 6.1.0 - Released 2022-01-11
 * Fix: Bug while displaying logs entries, due to CamelCase/Lower case classnames incompatibility
