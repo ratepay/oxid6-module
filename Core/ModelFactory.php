@@ -1,5 +1,13 @@
 <?php
 
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ *For the full copyright and license information, please view the LICENSE
+ *file that was distributed with this source code.
+ */
+
 namespace pi\ratepay\Core;
 
 use OxidEsales\Eshop\Application\Model\Order;
@@ -12,22 +20,6 @@ use pi\ratepay\Application\Model\Settings;
 use RatePAY\ModelBuilder;
 use RatePAY\RequestBuilder;
 
-/**
- * This program is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * @category  PayIntelligent
- * @package   PayIntelligent_RatePAY
- * @copyright (C) 2011 PayIntelligent GmbH  <http://www.payintelligent.de/>
- * @license	http://www.gnu.org/licenses/  GNU General Public License 3
- */
 class ModelFactory extends Base
 {
 
