@@ -654,6 +654,8 @@ class ModelFactory extends Base
             $phone = $this->getUser()->oxuser__oxmbfon->value;
         }
 
+        $oConfig = $this->getConfig();
+        $blShowNetPrice = $oConfig->getConfigParam('blShowNetPrice');
         $contentArr = [
             'Customer' => [
                 'Gender' => $gender,
@@ -678,7 +680,7 @@ class ModelFactory extends Base
             'ShoppingBasket' => $basket,
             'Payment' => [
                 'Method' => strtolower($util->getPaymentMethod($this->_paymentType)),
-                'Amount' => $this->_basket->getPrice()->getBruttoPrice()
+                'Amount' => $blShowNetPrice ? $this->_basket->getPrice()->getNettoPrice(): $this->_basket->getPrice()->getBruttoPrice()
             ]
         ];
 
