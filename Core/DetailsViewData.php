@@ -330,6 +330,14 @@ class DetailsViewData extends BaseModel
 
         $dTotalprice = 0;
 
+        $blIsNettoMode = false;
+        $dVoucherVat = 0;
+        $aOrderValues = $this->_piGetOrderValues();
+        if (count($aOrderValues) > 0) {
+            $blIsNettoMode = (bool) $aOrderValues[0]['OXISNETTOMODE'];
+            $dVoucherVat = $blIsNettoMode ? $this->getConfig()->getConfigParam('dDefaultVAT') : 0;
+        }
+
         $dSum = 0;
         for ($i = 0; $i < count($aRows); $i++) {
             $aRow = $aRows[$i];
@@ -340,7 +348,7 @@ class DetailsViewData extends BaseModel
                 $listEntry['artnum'] = 'voucher_' . $aRow['title'];
                 $listEntry['title'] = $aRow['seriesTitle'];
                 $listEntry['oxtitle'] = $aRow['seriesTitle'];
-                $listEntry['vat'] = "0";
+                $listEntry['vat'] = $dVoucherVat;
                 $listEntry['unitprice'] = (float)$aRow['price'];
                 $listEntry['amount'] = 1 - $aRow['SHIPPED'] - $aRow['CANCELLED'];
                 $listEntry['ordered'] = $aRow['ORDERED'];
@@ -359,7 +367,7 @@ class DetailsViewData extends BaseModel
                     $dTotal =
                         (float)$aRow['price'] +
                         ((float)$aRow['price'] *
-                            round((float)$aRow['VAT']) / 100);
+                            round((float)$dVoucherVat) / 100);
 
                     $listEntry['totalprice'] = $dTotal;
                 } else {

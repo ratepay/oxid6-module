@@ -813,10 +813,12 @@ class ModelFactory extends Base
 
         $sDiscountTitle = trim($sDiscountTitle, '_');
 
+        $blShowNetPrice = $this->getConfig()->getConfigParam('blShowNetPrice');
+        $dVat = $this->getConfig()->getConfigParam('dDefaultVAT');
         $discount = array(
             'Description'       => $sDiscountTitle,
-            'UnitPriceGross'    => $basket->getTotalDiscountSum(),
-            'TaxRate'           => $util->getFormattedNumber("0"),
+            'UnitPriceGross'    => $blShowNetPrice ? $basket->getTotalDiscountSum() * ((100+$dVat)/100) : $basket->getTotalDiscountSum(),
+            'TaxRate'           => $util->getFormattedNumber($blShowNetPrice ? $dVat : 0),
         );
 
         return $discount;
