@@ -95,6 +95,7 @@
         } else {
             echo "<div class='pirperror' id='pirperror'>" . $pi_lang_error . ":&nbsp;&nbsp;" . $pi_lang_request_error_else . "</div>";
         }
+        echo '<br />';
     } else {
         if (!empty($pi_resultArray)) {
             $rp_reason_code_translation = 'rp_reason_code_translation_' . $pi_calculator->getCode();
