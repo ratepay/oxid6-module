@@ -331,17 +331,18 @@ class DetailsViewData extends BaseModel
         $dTotalprice = 0;
 
         $blIsNettoMode = false;
-        $dVoucherVat = 0;
+        $dVoucherVat = $this->getConfig()->getConfigParam('dDefaultVAT');
         $aOrderValues = $this->_piGetOrderValues();
         if (count($aOrderValues) > 0) {
             $blIsNettoMode = (bool) $aOrderValues[0]['OXISNETTOMODE'];
-            $dVoucherVat = $blIsNettoMode ? $this->getConfig()->getConfigParam('dDefaultVAT') : 0;
         }
 
         $dSum = 0;
         for ($i = 0; $i < count($aRows); $i++) {
             $aRow = $aRows[$i];
             if ($aRow['price'] != 0) {
+                $dPrice = $blIsNettoMode ? (float)$aRow['price'] : (float)$aRow['price'] / ((100+$dVoucherVat)/100);
+
                 $listEntry['oxid'] = "";
                 $listEntry['artid'] = $aRow['artnr'];
                 $listEntry['arthash'] = md5($aRow['artnr']);
@@ -349,7 +350,7 @@ class DetailsViewData extends BaseModel
                 $listEntry['title'] = $aRow['seriesTitle'];
                 $listEntry['oxtitle'] = $aRow['seriesTitle'];
                 $listEntry['vat'] = $dVoucherVat;
-                $listEntry['unitprice'] = (float)$aRow['price'];
+                $listEntry['unitprice'] = $dPrice;
                 $listEntry['amount'] = 1 - $aRow['SHIPPED'] - $aRow['CANCELLED'];
                 $listEntry['ordered'] = $aRow['ORDERED'];
                 $listEntry['shipped'] = $aRow['SHIPPED'];
@@ -365,8 +366,8 @@ class DetailsViewData extends BaseModel
 
                 if ($blHasTotal) {
                     $dTotal =
-                        (float)$aRow['price'] +
-                        ((float)$aRow['price'] *
+                        $dPrice +
+                        ($dPrice *
                             round((float)$dVoucherVat) / 100);
 
                     $listEntry['totalprice'] = $dTotal;
@@ -374,7 +375,7 @@ class DetailsViewData extends BaseModel
                     $listEntry['totalprice'] = 0;
                 }
 
-                $dSum += (float)$aRow['price'];
+                $dSum += $dPrice;
                 $dTotalprice += $listEntry['totalprice'];
 
                 if ($blIsDisplayList === false && $blHasTotal && count($aRows) == ($i + 1) && $dSum != (float)$aRow['totaldiscount']) { // is last voucher

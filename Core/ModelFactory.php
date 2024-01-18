@@ -818,7 +818,7 @@ class ModelFactory extends Base
         $discount = array(
             'Description'       => $sDiscountTitle,
             'UnitPriceGross'    => $blShowNetPrice ? $basket->getTotalDiscountSum() * ((100+$dVat)/100) : $basket->getTotalDiscountSum(),
-            'TaxRate'           => $util->getFormattedNumber($blShowNetPrice ? $dVat : 0),
+            'TaxRate'           => $util->getFormattedNumber($dVat),
         );
 
         return $discount;
