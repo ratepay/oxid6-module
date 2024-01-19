@@ -88,6 +88,6 @@ $rp_sepa_terms_block_23 = "Es gelten dabei die mit meinem Kreditinstitut vereinb
 $pi_lang_error = "<b>Fehler</b>";
 $pi_lang_server_off = "Die RatePAY-Server sind zur Zeit nicht erreichbar. Bitte versuchen Sie es sp&auml;ter noch einmal.";
 $pi_lang_wrong_value = "Falsche Eingabe. Bitte ändern Sie ihre Eingabe.";
-$pi_lang_no_value = "Es wurde kein Betrag eingegeben!";
+$pi_lang_no_value = "Es wurde kein Betrag zur Ratenberechnung eingegeben!";
 $pi_lang_request_error_else = "Ein Fehler ist aufgetreten. Bitte kontaktieren Sie den Shopbetreiber.";
 $pi_lang_config_error_else = "Ein Fehler ist aufgetreten. Bitte kontaktieren Sie umgehend den Shopbetreiber.";
