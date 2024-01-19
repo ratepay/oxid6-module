@@ -88,6 +88,6 @@ $rp_sepa_terms_block_23 = "My rights are explained in a statement that I can obt
 $pi_lang_error = "<b>Error</b>";
 $pi_lang_server_off = "The RatePAY servers are currently unavailable. Please try again later.";
 $pi_lang_wrong_value = "Wrong entry. Please change your entry.";
-$pi_lang_no_value = "No amount was entered!";
+$pi_lang_no_value = "No amount for instalment calculation entered!";
 $pi_lang_request_error_else = "An error has occurred. Please contact the store owner.";
 $pi_lang_config_error_else = "An error has occurred. Please contact the store owner immediately.";
