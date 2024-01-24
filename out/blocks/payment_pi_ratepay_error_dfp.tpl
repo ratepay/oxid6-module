@@ -169,6 +169,9 @@
 function piAttachClickEvents(){
     var elements = $('input[name=paymentid]');
     $.each(elements, function( index, element ) {
+        element.addEventListener('click', piCalculator);
+    });
+    $.each(elements, function( index, element ) {
         element.addEventListener('click', piCheckFingerprint);
     });
 }
