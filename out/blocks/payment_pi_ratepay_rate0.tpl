@@ -25,57 +25,58 @@
         <div>
             [{ oxmultilang ident="PI_RATEPAY_POLICY" }]
         </div>
-        </br>
-        <ul class="form">
+
+        <div class="form" style="margin-top: 15px">
             [{if isset($pi_ratepay_rate0_fon_check)}]
-            <li>
+            <p style="margin-bottom: 15px;">
                 <label>[{oxmultilang ident="PI_RATEPAY_RATE0_VIEW_PAYMENT_FON"}]</label>
-                <input name='pi_ratepay_rate0_fon' type='text' value='' size='37'>
-            </li>
+                <input name='pi_ratepay_rate0_fon' type='text' value='' size='37' class='form-control'/>
+            </p>
             [{/if}]
             [{if isset($pi_ratepay_rate0_birthdate_check)}]
-            <li>
+            <p style="margin-bottom: 15px;">
                 <label>[{oxmultilang ident="PI_RATEPAY_RATE0_VIEW_PAYMENT_BIRTHDATE"}]</label>
-                <input name='pi_ratepay_rate0_birthdate_day' maxlength='2' type='text' value='' data-fieldsize='small'>
-                <input name='pi_ratepay_rate0_birthdate_month' maxlength='2' type='text' value='' data-fieldsize='small'>
-                <input name='pi_ratepay_rate0_birthdate_year' maxlength='4' type='text' value='' data-fieldsize='small'>
-                <div class='note'>[{oxmultilang ident="PI_RATEPAY_RATE0_VIEW_PAYMENT_BIRTHDATE_FORMAT"}]</div>
-            </li>
+                <input name='pi_ratepay_rate0_birthdate_day' maxlength='2' type='text' value='' data-fieldsize='small' class='form-control'/>
+                <input name='pi_ratepay_rate0_birthdate_month' maxlength='2' type='text' value='' data-fieldsize='small' class='form-control'/>
+                <input name='pi_ratepay_rate0_birthdate_year' maxlength='4' type='text' value='' data-fieldsize='small' class='form-control'/>
+                <span class='note'>[{oxmultilang ident="PI_RATEPAY_RATE0_VIEW_PAYMENT_BIRTHDATE_FORMAT"}]</span>
+            </p>
             [{/if}]
             [{if isset($pi_ratepay_rate0_company_check)}]
-            <li>
+            <p style="margin-bottom: 15px;">
                 <label>[{oxmultilang ident="PI_RATEPAY_RATE0_VIEW_PAYMENT_COMPANY"}]</label>
-                <input name='pi_ratepay_rate0_company' maxlength='255' size='37' type='text' value=''>
-            </li>
+                <input name='pi_ratepay_rate0_company' maxlength='255' size='37' type='text' value='' class='form-control'/>
+            </p>
             [{/if}]
             [{if isset($pi_ratepay_rate0_ust_check)}]
-            <li>
+            <p style="margin-bottom: 15px;">
                 <label>[{oxmultilang ident="PI_RATEPAY_RATE0_VIEW_PAYMENT_UST"}]</label>
-                <input name='pi_ratepay_rate0_ust' maxlength='255' size='37' type='text' value=''>
-            </li>
+                <input name='pi_ratepay_rate0_ust' maxlength='255' size='37' type='text' value='' class='form-control'/>
+            </p>
             [{/if}]
             [{if $pi_ratepay_rate0_activateelv == 1}]
-            <li>
+            <p style="margin-bottom: 15px;">
                 <label for="piRpRadioWire">[{oxmultilang ident="PI_RATEPAY_VIEW_RADIO_PAYMENT_WIRE"}]</label>
                 <input id="piRpRadioWire" type="radio" name="pi_rp_rate_pay_method" value="pi_ratepay_rate0_radio_wire" checked >
-            </li>
-            <li>
+            </p>
+            <p style="margin-bottom: 15px;">
                 <label for="piRpRadioElv">[{oxmultilang ident="PI_RATEPAY_VIEW_RADIO_LABEL_ELV"}]</label>
                 <input id="piRpRadioElv" type="radio" name="pi_rp_rate_pay_method" value="pi_ratepay_rate0_radio_elv">
-            </li>
+            </p>
             [{/if}]
-        </ul>
+        </div>
+
         [{if $pi_ratepay_rate0_activateelv == 1}]
-        <ul id="pi_ratepay_rate0_bank_box" class="form">
-            <li>
+        <div id="pi_ratepay_rate0_bank_box" class="form">
+            <p>
                 <label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_BANK_OWNER"}]:</label>
-                <input name='pi_ratepay_rate0_bank_owner' maxlength='255' size='37' type='text' value='[{$piDbBankowner}]'/>
-            </li>
-            <li>
+                <input name='pi_ratepay_rate0_bank_owner' maxlength='255' size='37' type='text' value='[{$piDbBankowner}]' class='form-control'/>
+            </p>
+            <p>
                 <label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_BANK_ACCOUNT_NUMBER"}]:</label>
-                <input name='pi_ratepay_rate0_bank_account_number' maxlength='255' size='37' type='text' value='[{$piDbBankaccountnumber}]'/>
-            </li>
-        </ul>
+                <input name='pi_ratepay_rate0_bank_account_number' maxlength='255' size='37' type='text' value='[{$piDbBankaccountnumber}]' class='form-control'/>
+            </p>
+        </div>
         [{/if}]
         [{ if isset($error)}]
         <div class="alert alert-danger">[{ oxmultilang ident="PI_RATEPAY_RECHNUNG_AGBERROR" }]</div>
