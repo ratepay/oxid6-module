@@ -22,6 +22,14 @@ use OxidEsales\Eshop\Core\Registry;
  */
 class RatepayOrder extends RatepayOrder_parent
 {
+    public function init()
+    {
+        parent::init();
+
+        $this->_setDeviceFingerPrint();
+    }
+
+
     /**
      * Check if this is a OXID 4.6.x Shop.
      * @return bool
@@ -47,7 +55,7 @@ class RatepayOrder extends RatepayOrder_parent
         /**
          * OX-44 clean session payment data as the order got placed
          */
-        if($nextStep == "thankyou"){
+        if(substr($nextStep, 0, 8) == "thankyou"){
             $this->cleanSessionPaymentData();
         }
 
@@ -77,6 +85,28 @@ class RatepayOrder extends RatepayOrder_parent
                 $session->deleteVariable($key);
             }
         }
+    }
+
+    /**
+     * Creates a device fingerprint token if not exists
+     */
+    private function _setDeviceFingerPrint() {
+        $DeviceFingerprintToken     = $this->getSession()->getVariable('pi_ratepay_dfp_token');
+        $DeviceFingerprintSnippetId = $this->getConfig()->getConfigParam('sRPDeviceFingerprintSnippetId');
+        if (empty($DeviceFingerprintSnippetId)) {
+            $DeviceFingerprintSnippetId = 'C9rKgOt'; // default value, so that there is always a device fingerprint
+        }
+
+        if (empty($DeviceFingerprintToken)) {
+            $timestamp = microtime();
+            $sessionId = $this->getSession()->getId();
+            $DeviceFingerprintToken = md5($sessionId . "_" . $timestamp);
+
+            $this->getSession()->setVariable('pi_ratepay_dfp_token', $DeviceFingerprintToken);
+        }
+
+        $this->addTplParam('pi_ratepay_dfp_token', $DeviceFingerprintToken);
+        $this->addTplParam('pi_ratepay_dfp_snippet_id', $DeviceFingerprintSnippetId);
     }
 }
 
