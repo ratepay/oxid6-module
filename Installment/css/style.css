@@ -8,9 +8,12 @@
  *file that was distributed with this source code.
  */
 
-.rpContainer {
-    width: 120%;
+@media (min-width: 992px) {
+    .rpContainer {
+        width: 120%;
+    }
 }
+
 .rp-installment-plan-description {
     display: none;
 }
