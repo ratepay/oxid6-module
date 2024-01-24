@@ -334,6 +334,14 @@ class DetailsViewData extends BaseModel
         $dVoucherVat = $this->getConfig()->getConfigParam('dDefaultVAT');
         $aOrderValues = $this->_piGetOrderValues();
         if (count($aOrderValues) > 0) {
+            $sOrderCountryId = $aOrderValues[0]['OXBILLCOUNTRYID'];
+            $oOrderCountry = oxNew('oxcountry');
+            if ($oOrderCountry->load($sOrderCountryId)) {
+                if ($oOrderCountry->oxcountry__oxvatstatus->value == 0) {
+                    $dVoucherVat = 0;
+                };
+            }
+
             $blIsNettoMode = (bool) $aOrderValues[0]['OXISNETTOMODE'];
         }
 

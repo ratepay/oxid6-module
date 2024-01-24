@@ -815,6 +815,14 @@ class ModelFactory extends Base
 
         $blShowNetPrice = $this->getConfig()->getConfigParam('blShowNetPrice');
         $dVat = $this->getConfig()->getConfigParam('dDefaultVAT');
+
+        $oOrderCountry = oxNew('oxcountry');
+        if ($oOrderCountry->load($this->_countryId)) {
+            if ($oOrderCountry->oxcountry__oxvatstatus->value == 0) {
+                $dVat = 0;
+            };
+        }
+
         $discount = array(
             'Description'       => $sDiscountTitle,
             'UnitPriceGross'    => $blShowNetPrice ? $basket->getTotalDiscountSum() * ((100+$dVat)/100) : $basket->getTotalDiscountSum(),
