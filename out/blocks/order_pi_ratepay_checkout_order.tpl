@@ -5,7 +5,7 @@
 *For the full copyright and license information, please view the LICENSE
 *file that was distributed with this source code.
 *-->
-[{if $pi_payment->getId()  == "pi_ratepay_rate" || $pi_payment->getId()  == "pi_ratepay_rate0" || $pi_payment->getId()  == "pi_ratepay_rechnung"}]
+[{if $pi_payment->getId()  == "pi_ratepay_rate" || $pi_payment->getId()  == "pi_ratepay_rate0" || $pi_payment->getId()  == "pi_ratepay_rechnung" || $pi_payment->getId()  == "pi_ratepay_elv"}]
     [{if isset($pi_ratepay_dfp_token)}]
     <noscript><link rel="stylesheet" type="text/css" href="//d.ratepay.com/di.css?t=[{$pi_ratepay_dfp_token}]&v=[{$pi_ratepay_dfp_snippet_id}]&l=Checkout"></noscript>
     <object type="application/x-shockwave-flash" data="//d.ratepay.com/[{$pi_ratepay_dfp_snippet_id}]/c.swf" style="float: right; visibility: hidden; height: 0px; width: 0px;">
@@ -14,7 +14,8 @@
         <param name="AllowScriptAccess" value="always"/>
     </object>
     [{/if}]
-
+[{/if}]
+[{if $pi_payment->getId()  == "pi_ratepay_rate" || $pi_payment->getId()  == "pi_ratepay_rate0" || $pi_payment->getId()  == "pi_ratepay_rechnung"}]
 <form action="[{ $oViewConf->getSslSelfLink() }]" method="post" id="orderConfirmAgbBottom">
     [{ $oViewConf->getHiddenSid() }]
     [{ $oViewConf->getNavFormParams() }]

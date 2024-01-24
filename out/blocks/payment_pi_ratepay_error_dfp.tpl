@@ -141,6 +141,7 @@
 
         if (
             paymentid == 'pi_ratepay_rate' ||
+            paymentid == 'pi_ratepay_rate0' ||
             paymentid == 'pi_ratepay_elv' ||
             paymentid == 'pi_ratepay_rechnung') {
 
