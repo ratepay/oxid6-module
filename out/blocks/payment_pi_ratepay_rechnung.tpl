@@ -25,36 +25,36 @@
         <div>
             [{ oxmultilang ident="PI_RATEPAY_POLICY" }]
         </div>
-        </br>
-        <ul class="form">
+
+        <div class="form" style="margin-top: 15px">
             [{if isset($pi_ratepay_rechnung_fon_check)}]
-            <li>
+            <p style="margin-bottom: 15px;">
                 <label>[{oxmultilang ident="PI_RATEPAY_RECHNUNG_VIEW_PAYMENT_FON"}]</label>
-                <input name='pi_ratepay_rechnung_fon' type='text' value='' size='37'/>
-            </li>
+                <input name='pi_ratepay_rechnung_fon' type='text' value='' size='37' class='form-control'/>
+            </p>
             [{/if}]
             [{if isset($pi_ratepay_rechnung_birthdate_check)}]
-            <li>
+            <p style="margin-bottom: 15px;">
                 <label>[{oxmultilang ident="PI_RATEPAY_RECHNUNG_VIEW_PAYMENT_BIRTHDATE"}]</label>
-                <input name='pi_ratepay_rechnung_birthdate_day' maxlength='2' type='text' value='' data-fieldsize='small'/>
-                <input name='pi_ratepay_rechnung_birthdate_month' maxlength='2' type='text' value='' data-fieldsize='small'/>
-                <input name='pi_ratepay_rechnung_birthdate_year' maxlength='4' type='text' value='' data-fieldsize='small'/>
-                <div class='note'>[{oxmultilang ident="PI_RATEPAY_RECHNUNG_VIEW_PAYMENT_BIRTHDATE_FORMAT"}]</div>
-            </li>
+                <input name='pi_ratepay_rechnung_birthdate_day' maxlength='2' type='text' value='' data-fieldsize='small' class='form-control'/>
+                <input name='pi_ratepay_rechnung_birthdate_month' maxlength='2' type='text' value='' data-fieldsize='small' class='form-control'/>
+                <input name='pi_ratepay_rechnung_birthdate_year' maxlength='4' type='text' value='' data-fieldsize='small' class='form-control'/>
+                <span class='note'>[{oxmultilang ident="PI_RATEPAY_RECHNUNG_VIEW_PAYMENT_BIRTHDATE_FORMAT"}]</span>
+            </p>
             [{/if}]
             [{if isset($pi_ratepay_rechnung_company_check)}]
-            <li>
+            <p style="margin-bottom: 15px;">
                 <label>[{oxmultilang ident="PI_RATEPAY_RECHNUNG_VIEW_PAYMENT_COMPANY"}]</label>
-                <input name='pi_ratepay_rechnung_company' maxlength='255' size='37' type='text' value=''/>
-            </li>
+                <input name='pi_ratepay_rechnung_company' maxlength='255' size='37' type='text' value='' class='form-control'/>
+            </p>
             [{/if}]
             [{if isset($pi_ratepay_rechnung_ust_check)}]
-            <li>
+            <p style="margin-bottom: 15px;">
                 <label>[{oxmultilang ident="PI_RATEPAY_RECHNUNG_VIEW_PAYMENT_UST"}]</label>
-                <input name='pi_ratepay_rechnung_ust' maxlength='255' size='37' type='text' value=''/>
-            </li>
+                <input name='pi_ratepay_rechnung_ust' maxlength='255' size='37' type='text' value='' class='form-control'/>
+            </p>
             [{/if}]
-        </ul>
+        </div>
     </dd>
 </dl>
 

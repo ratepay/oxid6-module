@@ -35,35 +35,36 @@
         <div style="padding-left: 4px;">
             [{oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION"}]
         </div>
-        <ul class="form">
-			[{if isset($pi_ratepay_elv_fon_check)}]
-				<li>
-					<label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_FON"}]</label>
-					<input name='pi_ratepay_elv_fon' type='text' value='' size='37'/>
-				</li>
-			[{/if}]
-			[{if isset($pi_ratepay_elv_birthdate_check)}]
-				<li>
-					<label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_BIRTHDATE"}]</label>
-					<input name='pi_ratepay_elv_birthdate_day' maxlength='2' type='text' value='' data-fieldsize='small'/>
-					<input name='pi_ratepay_elv_birthdate_month' maxlength='2' type='text' value='' data-fieldsize='small'/>
-					<input name='pi_ratepay_elv_birthdate_year' maxlength='4' type='text' value='' data-fieldsize='small'/>
-					<div class='note'>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_BIRTHDATE_FORMAT"}]</div>
-				</li>
-			[{/if}]
-			[{if isset($pi_ratepay_elv_company_check)}]
-				<li>
-					<label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_COMPANY"}]</label>
-					<input name='pi_ratepay_elv_company' maxlength='255' size='37' type='text' value=''/>
-				</li>
-			[{/if}]
-			[{if isset($pi_ratepay_elv_ust_check)}]
-				<li>
-					<label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_UST"}]</label>
-					<input name='pi_ratepay_elv_ust' maxlength='255' size='37' type='text' value=''/>
-				</li>
-			[{/if}]
-        </ul>
+
+        <div class="form" style="margin-top: 15px">
+            [{if isset($pi_ratepay_elv_fon_check)}]
+            <p style="margin-bottom: 15px;">
+                <label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_FON"}]</label>
+                <input name='pi_ratepay_elv_fon' type='text' value='' size='37' class='form-control'/>
+            </p>
+            [{/if}]
+            [{if isset($pi_ratepay_elv_birthdate_check)}]
+            <p style="margin-bottom: 15px;">
+                <label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_BIRTHDATE"}]</label>
+                <input name='pi_ratepay_elv_birthdate_day' maxlength='2' type='text' value='' data-fieldsize='small' class='form-control'/>
+                <input name='pi_ratepay_elv_birthdate_month' maxlength='2' type='text' value='' data-fieldsize='small' class='form-control'/>
+                <input name='pi_ratepay_elv_birthdate_year' maxlength='4' type='text' value='' data-fieldsize='small' class='form-control'/>
+                <span class='note'>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_BIRTHDATE_FORMAT"}]</span>
+            </p>
+            [{/if}]
+            [{if isset($pi_ratepay_elv_company_check)}]
+            <p style="margin-bottom: 15px;">
+                <label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_COMPANY"}]</label>
+                <input name='pi_ratepay_elv_company' maxlength='255' size='37' type='text' value='' class='form-control'/>
+            </p>
+            [{/if}]
+            [{if isset($pi_ratepay_elv_ust_check)}]
+            <p style="margin-bottom: 15px;">
+                <label>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PAYMENT_UST"}]</label>
+                <input name='pi_ratepay_elv_ust' maxlength='255' size='37' type='text' value='' class='form-control'/>
+            </p>
+            [{/if}]
+        </div>
 
         <input type="hidden" name="pi_ratepay_elv_bank_datatype" id="pi_ratepay_elv_bank_datatype" value="[{$pi_ratepay_elv_bank_datatype}]">
         <div class="form" id="pi_ratepay_elv_sepa_bankdata" [{if $pi_ratepay_elv_bank_datatype=="classic"}] style="display: none" [{/if}]>
