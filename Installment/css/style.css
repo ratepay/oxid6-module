@@ -12,6 +12,12 @@
     .rpContainer {
         width: 120%;
     }
+    .rp-table-striped {
+        width: 90%;
+    }
+    .rp-sepa-form {
+        width: 80%;
+    }
 }
 
 .rp-installment-plan-description {
@@ -29,9 +35,7 @@
 #pi_ratepay_rate_rp-show-installment-plan-details, #pi_ratepay_rate0_rp-show-installment-plan-details {
     display: block;
 }
-.rp-table-striped {
-    width: 90%;
-}
+
 .rp-menue,
 .rp-installment-plan-details,
 .rp-installment-plan-no-details {
@@ -59,8 +63,8 @@
     border-top: 1px solid #ddd
 }
 .rp-sepa-form {
-    width: 80%;
     margin-left: 14px;
+    margin-right: 20px;
 }
 .rp-sepa-table {
     margin-left: -10px;
@@ -96,6 +100,7 @@
     padding: 10px;
     text-align: center;
     font-weight: bold;
+    margin-right: 20px;
 }
 .rp-installment-header {
     display:inline-block;
