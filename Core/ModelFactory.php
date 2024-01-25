@@ -1032,6 +1032,11 @@ class ModelFactory extends Base
             $shoppingBasket['Items'][] = array('Item' => $item);
         }
 
+        $oOrder = oxNew(Order::class);
+        $oOrder->load($this->_orderId);
+        $oCurrency = $oOrder->getOrderCurrency();
+        $shoppingBasket['Currency'] = $oCurrency->name;
+
         return $shoppingBasket;
     }
 
