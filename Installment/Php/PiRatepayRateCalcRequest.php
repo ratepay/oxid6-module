@@ -58,8 +58,16 @@
             $pi_calculator->setErrorMsg('wrongsubtype');
         }
     } else {
-        $pi_calculator->prepareDetailsData();
-        $pi_resultArray = $pi_calculator->createFormattedResult();
+        $bShowPiResultArray = false;
+        if ($pi_calculator->getPostParameter('cl') == 'order' || !empty($calcValue)) {
+            $bShowPiResultArray = true;
+        } else {
+            $pi_calculator->setErrorMsg('novalue');
+        }
+        if ($bShowPiResultArray) {
+            $pi_calculator->prepareDetailsData();
+            $pi_resultArray = $pi_calculator->createFormattedResult();
+        }
     }
 
     $pi_language = $pi_calculator->getLanguage();
@@ -87,7 +95,8 @@
         } else {
             echo "<div class='pirperror' id='pirperror'>" . $pi_lang_error . ":&nbsp;&nbsp;" . $pi_lang_request_error_else . "</div>";
         }
-    } else{
+        echo '<br />';
+    } else {
         if (!empty($pi_resultArray)) {
             $rp_reason_code_translation = 'rp_reason_code_translation_' . $pi_calculator->getCode();
 ?>
