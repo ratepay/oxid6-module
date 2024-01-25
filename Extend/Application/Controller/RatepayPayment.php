@@ -983,18 +983,28 @@ class RatepayPayment extends RatepayPayment_parent
         $DeviceFingerprintToken     = $this->getSession()->getVariable('pi_ratepay_dfp_token');
         $DeviceFingerprintSnippetId = $this->getConfig()->getConfigParam('sRPDeviceFingerprintSnippetId');
         if (empty($DeviceFingerprintSnippetId)) {
-            $DeviceFingerprintSnippetId = 'ratepay'; // default value, so that there is always a device fingerprint
+            $DeviceFingerprintSnippetId = 'C9rKgOt'; // default value, so that there is always a device fingerprint
         }
 
         if (empty($DeviceFingerprintToken)) {
             $timestamp = microtime();
             $sessionId = $this->getSession()->getId();
-            $token = md5($sessionId . "_" . $timestamp);
+            $DeviceFingerprintToken = md5($sessionId . "_" . $timestamp);
 
-            $this->getSession()->setVariable('pi_ratepay_dfp_token', $token);
-            $this->addTplParam('pi_ratepay_dfp_token', $token);
-            $this->addTplParam('pi_ratepay_dfp_snippet_id', $DeviceFingerprintSnippetId);
+            $this->getSession()->setVariable('pi_ratepay_dfp_token', $DeviceFingerprintToken);
         }
+
+        $this->addTplParam('pi_ratepay_dfp_token', $DeviceFingerprintToken);
+        $this->addTplParam('pi_ratepay_dfp_snippet_id', $DeviceFingerprintSnippetId);
+
+        $blRatepayScriptSend = Registry::getSession()->getVariable('pi_ratepay_script_send');
+        if (!empty($blRatepayScriptSend)) {
+            $this->addTplParam('pi_ratepay_script_send', $blRatepayScriptSend);
+        }
+    }
+
+    public function setDiScriptSendAjax() {
+        Registry::getSession()->setVariable('pi_ratepay_script_send', 1);
     }
 
     private function _isSaveBankDataSet()

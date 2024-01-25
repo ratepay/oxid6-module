@@ -6,19 +6,7 @@
 *file that was distributed with this source code.
 *-->
 [{oxscript add="piAttachClickEvents();"}]
-
-[{if isset($pi_ratepay_dfp_token)}]
-    <script language="JavaScript" async>
-        var di = {t:'[{$pi_ratepay_dfp_token}]',v:'[{$pi_ratepay_dfp_snippet_id}]',l:'Checkout'};
-    </script>
-    <script type="text/javascript" src="//d.ratepay.com/[{$pi_ratepay_dfp_snippet_id}]/di.js" async></script>
-    <noscript><link rel="stylesheet" type="text/css" href="//d.ratepay.com/di.css?t=[{$pi_ratepay_dfp_token}]&v=[{$pi_ratepay_dfp_snippet_id}]&l=Checkout"></noscript>
-    <object type="application/x-shockwave-flash" data="//d.ratepay.com/[{$pi_ratepay_dfp_snippet_id}]/c.swf" style="float: right; visibility: hidden; height: 0px; width: 0px;">
-        <param name="movie" value="//d.ratepay.com/[{$pi_ratepay_dfp_snippet_id}]/c.swf" />
-        <param name="flashvars" value="t=[{$pi_ratepay_dfp_token}]&v=[{$pi_ratepay_dfp_snippet_id}]&l=Checkout"/>
-        <param name="AllowScriptAccess" value="always"/>
-    </object>
-[{/if}]
+[{oxscript add="piCheckFingerprint();"}]
 
 [{foreach from=$piRatepayErrors item=pierror}]
 
@@ -140,11 +128,52 @@
     [{/if}]
 [{/foreach}]
 
+<script language="JavaScript" async>
+    function piCheckFingerprint () {
+        var paymentid = '';
+
+        var elements = $('input[name=paymentid]');
+        $.each(elements, function( index, element) {
+            if (element.checked) {
+                paymentid = element.value;
+            }
+        });
+
+        if (
+            paymentid == 'pi_ratepay_rate' ||
+            paymentid == 'pi_ratepay_rate0' ||
+            paymentid == 'pi_ratepay_elv' ||
+            paymentid == 'pi_ratepay_rechnung') {
+
+            [{if !isset($pi_ratepay_script_send)}]
+            if (typeof blInserted == 'undefined') {
+                var diSkriptVar = document.createElement('script');
+                diSkriptVar.type = 'text/javascript';
+                diSkriptVar.text =  "var blInserted = true;var di = {t:'{{ pi_ratepay_dfp_token }}',v:'{{ pi_ratepay_dfp_snippet_id }}',l:'Checkout'};";
+                document.getElementsByTagName('head')[0].appendChild(diSkriptVar);
+
+                var diSkript = document.createElement('script');
+                diSkript.type = 'text/javascript';
+                diSkript.src = '//d.ratepay.com/{{ pi_ratepay_dfp_snippet_id }}/di.js';
+                document.getElementsByTagName('head')[0].appendChild(diSkript);
+                $.ajax({
+                    type: "POST",
+                    url: '/index.php?cl=RatepayPayment&fnc=setDiScriptSendAjax',
+                });
+            }
+            [{/if}]
+        }
+    }
+</script>
+
 <script type="text/javascript">
 function piAttachClickEvents(){
     var elements = $('input[name=paymentid]');
     $.each(elements, function( index, element ) {
         element.addEventListener('click', piCalculator);
+    });
+    $.each(elements, function( index, element ) {
+        element.addEventListener('click', piCheckFingerprint);
     });
 }
 function piTogglePolicy(policy) {
