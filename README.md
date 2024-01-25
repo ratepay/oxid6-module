@@ -6,13 +6,20 @@
 |Author | `Fatchip GmbH`
 |Prefix | `pi`
 |Shop Version | `CE/PE` `CE/PE/EE` `6.0.x-6.5.x`
-|Version | `6.1.2`
+|Version | `6.2.0`
 |Link | http://www.ratepay.com
 |Mail | integration@ratepay.com
 |Full Documentation | [click here](https://docs.ratepay.com/docs/developer/shop_modules/oxid/ratepay_payment_plugin_for_oxid/)|
 |Legal Disclaimer   | [click here](https://docs.ratepay.com/docs/developer/shop_modules/overview/)| 
 
 ## Changelog
+
+### Version 6.2.0 - Released 2024-01-25
+* Fix : Voucher requests in Net price mode
+* Fix : Currency swapping in order post-processing
+* Fix : Disabling/Enabling checkout button between regular and RP methods
+* Update : Restrict DFP loading to minimal necessity
+* Update : Various styling
 
 ### Version 6.1.2 - Released 2023-01-17
 * Update : Change Docblock headers
