@@ -5,6 +5,8 @@
 *For the full copyright and license information, please view the LICENSE
 *file that was distributed with this source code.
 *-->
+[{oxscript add="piAttachClickEvents();"}]
+
 [{if isset($pi_ratepay_dfp_token)}]
     <script language="JavaScript" async>
         var di = {t:'[{$pi_ratepay_dfp_token}]',v:'[{$pi_ratepay_dfp_snippet_id}]',l:'Checkout'};
@@ -139,6 +141,12 @@
 [{/foreach}]
 
 <script type="text/javascript">
+function piAttachClickEvents(){
+    var elements = $('input[name=paymentid]');
+    $.each(elements, function( index, element ) {
+        element.addEventListener('click', piCalculator);
+    });
+}
 function piTogglePolicy(policy) {
     $('#policyButton' + policy).click(function() {
         $('.policyButtonText' + policy).toggle();
