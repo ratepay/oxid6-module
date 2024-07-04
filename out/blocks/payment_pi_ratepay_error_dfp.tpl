@@ -8,6 +8,8 @@
 [{oxscript add="piAttachClickEvents();"}]
 [{oxscript add="piCheckFingerprint();"}]
 
+[{$smarty.block.parent}]
+
 [{foreach from=$piRatepayErrors item=pierror}]
 
     [{if $pierror == "-300"}]
