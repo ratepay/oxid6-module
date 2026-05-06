@@ -1,13 +1,5 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Extend\Application\Controller\Admin;
 
 use OxidEsales\Eshop\Core\Registry;
@@ -15,6 +7,13 @@ use pi\ratepay\Application\Model\Settings;
 use pi\ratepay\Core\ModelFactory;
 use pi\ratepay\Core\Utilities;
 
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 class RatepayModuleConfig extends RatepayModuleConfig_parent
 {
 
@@ -165,13 +164,12 @@ class RatepayModuleConfig extends RatepayModuleConfig_parent
             !empty($sProfileId) &&
             !empty($sSecurityCode)
         );
-
         if (!$blValid) return false;
-
         $modelFactory = oxNew(ModelFactory::class);
         $modelFactory->setSecurityCode($sSecurityCode);
         $modelFactory->setProfileId($sProfileId);
         $modelFactory->setSandbox($blSandbox);
+
         $aResult = $modelFactory->doOperation('PROFILE_REQUEST');
 
         return $aResult;
@@ -189,7 +187,7 @@ class RatepayModuleConfig extends RatepayModuleConfig_parent
         $oConfig = $this->getConfig();
         $aCountries = Utilities::$_RATEPAY_ALLOWED_COUNTRIES;
         $aMethods = Utilities::$_RATEPAY_PAYMENT_METHOD_NAMES;
-        $aActiveCombinations = array();
+        $aActiveCombinations = [];
 
         foreach ($aCountries as $sCountry) {
             foreach ($aMethods as $sRequestMethod => $sMethod) {
@@ -205,12 +203,12 @@ class RatepayModuleConfig extends RatepayModuleConfig_parent
 
                 if (!$blIsActive) continue;
 
-                $aActiveCombinations[] = array(
+                $aActiveCombinations[] = [
                     'country'       => $sCountry,
-                    'method'          => $sMethod,
+                    'method'        => $sMethod,
                     'configparams'  => $aConfig,
                     'requestmethod' => $sRequestMethod,
-                );
+                ];
             }
         }
 

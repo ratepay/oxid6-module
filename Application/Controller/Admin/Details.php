@@ -15,7 +15,8 @@ use OxidEsales\Eshop\Application\Model\ArticleList;
 use OxidEsales\Eshop\Application\Model\Order;
 use OxidEsales\Eshop\Application\Model\OrderArticle;
 use OxidEsales\Eshop\Application\Model\Voucher;
-use OxidEsales\Eshop\Core\DatabaseProvider;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Database\QueryBuilderFactoryInterface;
 use OxidEsales\Eshop\Core\Field;
 use OxidEsales\Eshop\Core\Registry;
 use pi\ratepay\Application\Model\Settings;
@@ -172,11 +173,27 @@ class Details extends AdminDetailsController
 
             $pirptotalamountvalue = str_replace(".", ",", $this->_getFormattedNumber($pirptotalamountvalue)) . " EUR";
             $pirpamountvalue = str_replace(".", ",", $this->_getFormattedNumber($pirpamountvalue)) . " EUR";
-            $pirpinterestamountvalue = str_replace(".", ",", $this->_getFormattedNumber($pirpinterestamountvalue)) . " EUR";
-            $pirpservicechargevalue = str_replace(".", ",", $this->_getFormattedNumber($pirpservicechargevalue)) . " EUR";
-            $pirpannualpercentageratevalue = str_replace(".", ",", $this->_getFormattedNumber($pirpannualpercentageratevalue)) . "%";
+            $pirpinterestamountvalue = str_replace(
+                    ".",
+                    ",",
+                    $this->_getFormattedNumber($pirpinterestamountvalue)
+                ) . " EUR";
+            $pirpservicechargevalue = str_replace(
+                    ".",
+                    ",",
+                    $this->_getFormattedNumber($pirpservicechargevalue)
+                ) . " EUR";
+            $pirpannualpercentageratevalue = str_replace(
+                    ".",
+                    ",",
+                    $this->_getFormattedNumber($pirpannualpercentageratevalue)
+                ) . "%";
             $pirpdebitinterestvalue = str_replace(".", ",", $this->_getFormattedNumber($pirpdebitinterestvalue)) . "%";
-            $pirpnumberofratesvalue = str_replace(".", ",", $this->_getFormattedNumber($pirpnumberofratesvalue)) . " Monate";
+            $pirpnumberofratesvalue = str_replace(
+                    ".",
+                    ",",
+                    $this->_getFormattedNumber($pirpnumberofratesvalue)
+                ) . " Monate";
             $pirpratevalue = str_replace(".", ",", $this->_getFormattedNumber($pirpratevalue)) . " EUR";
             $pirplastratevalue = str_replace(".", ",", $this->_getFormattedNumber($pirplastratevalue)) . " EUR";
 
@@ -232,10 +249,10 @@ class Details extends AdminDetailsController
         $this->_initRatepayDetails($this->getEditObject());
 
         if (isset($voucherAmount) && preg_match("/^[0-9]{1,4}$/", $voucherAmount)) {
-            $voucherKomma = isset($voucherKomma) && preg_match('/^[0-9]{1,2}$/', $voucherKomma)? $voucherKomma : '00';
+            $voucherKomma = isset($voucherKomma) && preg_match('/^[0-9]{1,2}$/', $voucherKomma) ? $voucherKomma : '00';
 
             $voucherAmount .= '.' . $voucherKomma;
-            $voucherAmount = (double) $voucherAmount;
+            $voucherAmount = (double)$voucherAmount;
 
             if ($voucherAmount <= $this->getEditObject()->getTotalOrderSum() && $voucherAmount > 0) {
                 $this->piRatepayVoucher = $voucherAmount;
@@ -259,8 +276,9 @@ class Details extends AdminDetailsController
         $ratepayHistoryList = oxNew(HistoryList::class);
         $ratepayHistoryList->getFilteredList("order_number = '" . $this->_getOrderId() . "'");
 
-        $historyList = array();
+        $historyList = [];
 
+        /** @var History $historyItem */
         foreach ($ratepayHistoryList as $historyItem) {
             $title = '';
             $articleNumber = '';
@@ -272,14 +290,14 @@ class Details extends AdminDetailsController
                 }
             }
 
-            array_push($historyList, array(
+            array_push($historyList, [
                 'article_number' => $articleNumber,
                 'title'          => $title,
                 'quantity'       => $historyItem->pi_ratepay_history__quantity->rawValue,
                 'method'         => $historyItem->pi_ratepay_history__method->rawValue,
                 'subtype'        => $historyItem->pi_ratepay_history__submethod->rawValue,
                 'date'           => $historyItem->pi_ratepay_history__date->rawValue
-            ));
+            ]);
         }
 
         return $historyList;
@@ -309,25 +327,36 @@ class Details extends AdminDetailsController
         $orderId = $this->_getOrderId();
         $oArticles = $this->getPreparedOrderArticles();
 
-        $voucherCount = DatabaseProvider::getDb()->getOne("SELECT count( * ) AS nr FROM `oxvouchers`	WHERE oxvouchernr LIKE 'pi-Merchant-Voucher-%'");
-        $voucherNr = "pi-Merchant-Voucher-" . $voucherCount;
+        $oContainer = ContainerFactory::getInstance()->getContainer();
+        /** @var QueryBuilderFactoryInterface $queryBuilderFactory */
+        $oQueryBuilderFactory = $oContainer->get(QueryBuilderFactoryInterface::class);
+        $oQueryBuilder = $oQueryBuilderFactory->create();
+        $oQueryBuilder
+            ->select('count( * )')
+            ->from('oxvouchers')
+            ->where('oxvouchernr LIKE :word')
+            ->setParameter(':word', 'pi-Merchant-Voucher-%');
+        $sVoucherCount = $oQueryBuilder->execute();
+        $sVoucherCount = $sVoucherCount->fetchOne();
+
+        $sVoucherNr = "pi-Merchant-Voucher-" . $sVoucherCount;
 
         $newVoucher = oxNew(Voucher::class);
-        $newVoucher->assign(array(
+        $newVoucher->assign([
             'oxvoucherserieid' => 'pi_ratepay_voucher',
             'oxorderid' => $orderId,
             'oxuserid' => $order->getFieldData("oxuserid"),
             'oxdiscount' => $this->piRatepayVoucher,
             'oxdateused' => date('Y-m-d', Registry::get("oxUtilsDate")->getTime()),
-            'oxvouchernr' => $voucherNr
-        ));
+            'oxvouchernr' => $sVoucherNr
+        ]);
 
         $newVoucher->save();
-        $this->_recalculateOrder($order, $oArticles, $voucherNr);
+        $this->_recalculateOrder($order, $oArticles, $sVoucherNr);
 
         $tmptotal = 0;
-        foreach ($oArticles as $article){
-            if($article['amount'] > 0){
+        foreach ($oArticles as $article) {
+            if ($article['amount'] > 0) {
                 $tmptotal += $article['amount'] * $article['bruttoprice'];
             }
         }
@@ -336,16 +365,16 @@ class Details extends AdminDetailsController
 
         $voucherDetails = oxNew(OrderDetails::class);
 
-        $voucherDetails->assign(array(
+        $voucherDetails->assign([
             'order_number' => $orderId,
             'article_number' => $voucherId,
             'unique_article_number' => $voucherId,
             'ordered' => 1,
-        ));
-        if ($tmptotal < $this->piRatepayVoucher){
-            $voucherDetails->assign(array(
+        ]);
+        if ($tmptotal < $this->piRatepayVoucher) {
+            $voucherDetails->assign([
                 'shipped' => 1,
-            ));
+            ]);
         }
 
         $voucherDetails->save();
@@ -360,16 +389,27 @@ class Details extends AdminDetailsController
     {
         $operation = "PAYMENT_CHANGE";
         $subtype = "credit";
-        $nr = DatabaseProvider::getDb()->getOne("SELECT count( * ) AS nr FROM `oxvouchers` WHERE oxvouchernr LIKE 'pi-Merchant-Voucher-%'");
-        $vouchertitel = "pi-Merchant-Voucher-" . $nr;
 
-        $articles[] = array(
+        $oContainer = ContainerFactory::getInstance()->getContainer();
+        /** @var QueryBuilderFactoryInterface $queryBuilderFactory */
+        $oQueryBuilderFactory = $oContainer->get(QueryBuilderFactoryInterface::class);
+        $oQueryBuilder = $oQueryBuilderFactory->create();
+        $oQueryBuilder
+            ->select('count(*)')
+            ->from('oxvouchers')
+            ->where('oxvouchernr LIKE :word')
+            ->setParameter(':word', 'pi-Merchant-Voucher-%');
+        $sNr = $oQueryBuilder->execute();
+        $sNr = $sNr->fetchOne();
+        $vouchertitel = "pi-Merchant-Voucher-" . $sNr;
+
+        $articles[] = [
             'title'     => 'Credit',
             'artnum'    => $vouchertitel,
             'unitprice' => "-" . $this->_getFormattedNumber($this->piRatepayVoucher),
             'arthash'   => 1,
             'vat'       => 0,
-        );
+        ];
 
         $modelFactory = oxNew(ModelFactory::class);
         $paymentMethod = Utilities::getPaymentMethod($this->_paymentSid);
@@ -414,23 +454,45 @@ class Details extends AdminDetailsController
         $isSuccess = 'pierror';
         if ($change->isSuccessful()) {
             $articles = $this->getPreparedOrderArticles();
-            $articleList = array();
+            $articleList = [];
+            $oContainer = ContainerFactory::getInstance()->getContainer();
+            /** @var QueryBuilderFactoryInterface $queryBuilderFactory */
+            $oQueryBuilderFactory = $oContainer->get(QueryBuilderFactoryInterface::class);
             foreach ($articles as $article) {
                 if (Registry::getConfig()->getRequestParameter($article['arthash']) > 0) {
-                    $quant = Registry::getConfig()->getRequestParameter($article['arthash']);
+                    $quant = (int) Registry::getConfig()->getRequestParameter($article['arthash']);
                     $artid = $article['artid'];
                     $uniqueArticleNumber = $article['unique_article_number'];
                     if (empty($uniqueArticleNumber)) {
                         $uniqueArticleNumber = $artid;
                     }
                     if ($paymentChangeType == "cancellation") {
-                        DatabaseProvider::getDb()->execute("UPDATE {$this->pi_ratepay_order_details} SET cancelled = cancelled + {$quant} WHERE order_number = '".$this->_getOrderId()."' AND unique_article_number = '{$uniqueArticleNumber}'");
-                    } else if ($paymentChangeType == "return") {
-                        DatabaseProvider::getDb()->execute("UPDATE {$this->pi_ratepay_order_details} SET returned = returned + {$quant} WHERE order_number = '".$this->_getOrderId()."' AND unique_article_number = '{$uniqueArticleNumber}'");
+                        $oQueryBuilder = $oQueryBuilderFactory->create();
+                        $oQueryBuilder
+                            ->update($this->pi_ratepay_order_details)
+                            ->set('cancelled', 'cancelled + ' . $quant)
+                            ->where('order_number = :orderId')
+                            ->setParameter(':orderId', $this->_getOrderId())
+                            ->andWhere('unique_article_number = :uniqueArticleNumber')
+                            ->setParameter(':uniqueArticleNumber', $uniqueArticleNumber);
+                        $oQueryBuilder->execute();
+                    } else {
+                        if ($paymentChangeType == "return") {
+                            $oQueryBuilder = $oQueryBuilderFactory->create();
+                            $oQueryBuilder
+                                ->update($this->pi_ratepay_order_details)
+                                ->set('returned', 'returned + ' . $quant)
+                                ->where('order_number = :orderId')
+                                ->setParameter(':orderId', $this->_getOrderId())
+                                ->andWhere('unique_article_number = :uniqueArticleNumber')
+                                ->setParameter(':uniqueArticleNumber', $uniqueArticleNumber);
+                            $oQueryBuilder->execute();
+                        }
                     }
                     $this->_logHistory($this->_getOrderId(), $artid, $quant, $operation, $paymentChangeType);
                     if ($article['oxid'] != "") {
-                        $articleList[$article['oxid']] = array('oxamount' => $article['ordered'] - $article['cancelled'] - $article['returned'] - Registry::getConfig()->getRequestParameter($article['arthash']));
+                        $articleList[$article['oxid']] = [
+                            'oxamount' => $article['ordered'] - $article['cancelled'] - $article['returned'] - Registry::getConfig()->getRequestParameter($article['arthash'])];
                     } else {
                         $oOrder = $this->getEditObject();
 
@@ -487,7 +549,7 @@ class Details extends AdminDetailsController
     {
         $settings = oxNew(Settings::class);
         $settings->loadByType(strtolower($method), $this->_shopId);
-        return ($settings->pi_ratepay_settings__sandbox->rawValue);
+        return ($settings->getFieldData('sandbox'));
     }
 
     /**
@@ -512,16 +574,27 @@ class Details extends AdminDetailsController
 
         if ($deliver->isSuccessful()) {
             $articles = $this->getPreparedOrderArticles();
+
+            $oContainer = ContainerFactory::getInstance()->getContainer();
+            /** @var QueryBuilderFactoryInterface $queryBuilderFactory */
+            $oQueryBuilderFactory = $oContainer->get(QueryBuilderFactoryInterface::class);
             foreach ($articles as $article) {
                 if (Registry::getConfig()->getRequestParameter($article['arthash']) > 0) {
-                    $quant = Registry::getConfig()->getRequestParameter($article['arthash']);
+                    $quant = (int) Registry::getConfig()->getRequestParameter($article['arthash']);
                     $artid = $article['artid'];
                     $uniqueArticleNumber = $article['unique_article_number'];
                     if (empty($uniqueArticleNumber)) {
                         $uniqueArticleNumber = $artid;
                     }
-                    // @todo this can be done better
-                    DatabaseProvider::getDb()->execute("UPDATE {$this->pi_ratepay_order_details} SET shipped = shipped + {$quant} WHERE order_number = '".$this->_getOrderId()."' and unique_article_number = '{$uniqueArticleNumber}'");
+                    $oQueryBuilder = $oQueryBuilderFactory->create();
+                    $oQueryBuilder
+                        ->update($this->pi_ratepay_order_details)
+                        ->set('shipped', 'shipped + ' . $quant)
+                        ->where('order_number = :orderId')
+                        ->setParameter(':orderId', $this->_getOrderId())
+                        ->andWhere('unique_article_number = :uniqueArticleNumber')
+                        ->setParameter(':uniqueArticleNumber', $uniqueArticleNumber);
+                    $oQueryBuilder->execute();
                     $this->_logHistory($this->_getOrderId(), $artid, $quant, $operation, '');
                 }
             }
@@ -543,14 +616,14 @@ class Details extends AdminDetailsController
     protected function _logHistory($orderId, $artid, $quant, $operation, $subtype)
     {
         $ratepayHistory = oxNew(History::class);
-        $ratepayHistory->assign(array(
+        $ratepayHistory->assign([
             'order_number'   => $orderId,
             'article_number' => $artid,
             'quantity'       => $quant,
             'method'         => $operation,
             'submethod'      => $subtype,
             'date'           => date('Y-m-d H:i:s', Registry::get("oxUtilsDate")->getTime())
-        ));
+        ]);
         $ratepayHistory->save();
     }
 
@@ -565,7 +638,6 @@ class Details extends AdminDetailsController
         $oArticles = $this->getPreparedOrderArticles();
 
         if (is_array($aOrderArticles) && $oOrder = $this->getEditObject()) {
-
             $myConfig = $this->getConfig();
             $oOrderArticles = $oOrder->getOrderArticles();
             $blUseStock = $myConfig->getConfigParam('blUseStock');
@@ -578,7 +650,6 @@ class Details extends AdminDetailsController
             foreach ($oOrderArticles as $oOrderArticle) {
                 $sItemId = $oOrderArticle->getId();
                 if (isset($aOrderArticles[$sItemId])) {
-
                     // update stock
                     if ($blUseStock) {
                         $oOrderArticle->setNewAmount($aOrderArticles[$sItemId]['oxamount']);
@@ -604,6 +675,10 @@ class Details extends AdminDetailsController
     public function storno($sItemId)
     {
         $myConfig = $this->getConfig();
+        $oContainer = ContainerFactory::getInstance()->getContainer();
+        /** @var QueryBuilderFactoryInterface $queryBuilderFactory */
+        $oQueryBuilderFactory = $oContainer->get(QueryBuilderFactoryInterface::class);
+        $oQueryBuilder = $oQueryBuilderFactory->create();
 
         $sOrderArtId = $sItemId;
         $oArticle = oxNew(OrderArticle::class);
@@ -613,12 +688,17 @@ class Details extends AdminDetailsController
 
         // stock information
         if ($myConfig->getConfigParam('blUseStock')) {
-            $oArticle->updateArticleStock($oArticle->oxorderarticles__oxamount->value, $myConfig->getConfigParam('blAllowNegativeStock'));
+            $oArticle->updateArticleStock(
+                $oArticle->getFieldData('oxamount'),
+                $myConfig->getConfigParam('blAllowNegativeStock')
+            );
         }
-
-        $oDb = DatabaseProvider::getDb();
-        $sQ = "update oxorderarticles set oxstorno = " . $oDb->quote($oArticle->oxorderarticles__oxstorno->value) . " where oxid =" . $oDb->quote($sOrderArtId);
-        $oDb->execute($sQ);
+        $oQueryBuilder
+            ->update('oxorderarticles')
+            ->set('oxstorno', $oArticle->getFieldData('oxstorno'))
+            ->where('oxid = :oxid')
+            ->setParameter(':oxid', $sOrderArtId);
+        $oQueryBuilder->execute();
     }
 
     /**
@@ -658,16 +738,21 @@ class Details extends AdminDetailsController
         // keeps old delivery cost
         $oOrder->reloadDiscount(false);
         $oOrder->reloadDelivery(false);
-        $oDb = DatabaseProvider::getDb();
+        $oContainer = ContainerFactory::getInstance()->getContainer();
+        /** @var QueryBuilderFactoryInterface $queryBuilderFactory */
+        $oQueryBuilderFactory = $oContainer->get(QueryBuilderFactoryInterface::class);
 
         $totalprice = 0;
         $voucherDiscountTotal = 0;
 
-        foreach($aOrderArticles as $article) {
+        foreach ($aOrderArticles as $article) {
             if (substr($article['artnum'], 0, 7) == 'voucher' && ($article['ordered'] - $article['returned'] > 0)) {
                 $voucherDiscountTotal += $article['totalprice'];
             }
-            if ($article['artnum'] == 'discount' || substr($article['artnum'], 0, 7) == 'voucher' || stripos($article['artnum'], 'pi-Merchant-Voucher') !== false) {
+            if ($article['artnum'] == 'discount' || substr($article['artnum'], 0, 7) == 'voucher' || stripos(
+                    $article['artnum'],
+                    'pi-Merchant-Voucher'
+                ) !== false) {
                 $totalprice -= $article['totalprice'];
             } else {
                 $totalprice += $article['totalprice'];
@@ -675,18 +760,36 @@ class Details extends AdminDetailsController
         }
 
         if ($voucherNr != null) {
-            $discount = (float) $oDb->getOne("select oxdiscount from oxvouchers where oxvouchernr = '" . $voucherNr . "'");
-            $voucherDiscountTotal += $discount;
-            $totalprice -= $discount;
+            $oQueryBuilder = $oQueryBuilderFactory->create();
+            $oQueryBuilder
+                ->select('oxdiscount')
+                ->from('oxvouchers')
+                ->where('oxvouchernr = :voucherNr')
+                ->setParameter(':voucherNr', $voucherNr);
+            $sDiscount = $oQueryBuilder->execute();
+            $sDiscount = (float)$sDiscount->fetchOne();
+            $voucherDiscountTotal += $sDiscount;
+            $totalprice -= $sDiscount;
         }
 
-        if ($oOrder->oxorder__oxvoucherdiscount->getRawValue() != $voucherDiscountTotal) {
-            $oDb->execute("update oxorder set oxvoucherdiscount ='" . $voucherDiscountTotal . "'where oxid=" . $oDb->quote($oOrder->oxorder__oxid->getRawValue()));
+        if ($oOrder->getFieldData('oxvoucherdiscount') != $voucherDiscountTotal) {
+            $oQueryBuilder = $oQueryBuilderFactory->create();
+            $oQueryBuilder
+                ->update('oxorder')
+                ->set('oxvoucherdiscount', $voucherDiscountTotal)
+                ->where('oxid = :oxid')
+                ->setParameter(':oxid', $oOrder->getFieldData('oxid'));
+            $oQueryBuilder->execute();
         }
 
         if ($totalprice > 0) {
-            $sQ = "update oxorder set oxtotalordersum = '" . $totalprice . "'  where oxid = " . $oDb->quote($oOrder->oxorder__oxid->getRawValue());
-            $oDb->execute($sQ);
+            $oQueryBuilder = $oQueryBuilderFactory->create();
+            $oQueryBuilder
+                ->update('oxorder')
+                ->set('oxtotalordersum', $totalprice)
+                ->where('oxid = :oxid')
+                ->setParameter(':oxid', $oOrder->oxorder__oxid->getRawValue());
+            $oQueryBuilder->execute();
             $oOrder->oxorder__oxtotalordersum->setValue($totalprice);
         }
     }
@@ -699,7 +802,7 @@ class Details extends AdminDetailsController
     {
         if ($this->_paymentSid === null) {
             $order = $this->getEditObject();
-            $this->_paymentSid = isset($order)? $order->getPaymentType()->oxuserpayments__oxpaymentsid->value : false;
+            $this->_paymentSid = isset($order)? $order->getPaymentType()->getFieldData('oxpaymentsid') : false;
         }
         return $this->_paymentSid;
     }

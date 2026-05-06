@@ -11,7 +11,7 @@
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
-$aLang = array(
+$aLang = [
     'charset'                                  => 'UTF-8',
     'SHOP_MODULE_GROUP_PI_RATEPAY_GENERAL'     => 'General',
     'SHOP_MODULE_GROUP_PI_RATEPAY_GERMANY'     => 'Germany',
@@ -175,4 +175,4 @@ $aLang = array(
     'PI_RATEPAY_SAVEBANKDATA'                  => "Save bank data (encrypted)",
     'PI_RATEPAY_ACTIVATE_ELV'                  => "Enable Debit for installment",
     'PI_RATEPAY_CONFIGSAVESUCCESS'             => "The configuration has been updated successfully.",
-);
+];

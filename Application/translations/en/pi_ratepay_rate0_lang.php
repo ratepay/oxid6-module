@@ -4,8 +4,8 @@
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 // -------------------------------
@@ -19,7 +19,7 @@ $piErrorPhone = 'To make a payment via Ratepay Rate, please provide your phone n
 $piErrorCompany = 'Please enter your company name and VAT ID.';
 $piErrorBirthdayDigits = 'Please enter your year of birth in four digits. (e.g. 1982)';
 
-$aLang = array(
+$aLang = [
     'charset'                                       => 'UTF-8',
     'PI_RATEPAY_RATE0_VIEW_SANDBOX_NOTIFICATION'     => 'Testmode activated, please DONT use this payment method and get in contact with the merchant.',
     'PI_RATEPAY_RATE0_VIEW_POLICY_TEXT_1'            => 'I have read and accepted  the ',
@@ -46,4 +46,4 @@ $aLang = array(
     'PI_RATEPAY_ERROR_BIRTHDAY_YEAR_DIGITS'         => $piErrorBirthdayDigits,
     'PI_RATEPAY_ERROR_COMPANY'                      => $piErrorCompany,
     'PI_RATEPAY_RATE0_ERROR_CALCULATE_TO_PROCEED'    => 'Please create an installment plan to proceed.'
-);
+];

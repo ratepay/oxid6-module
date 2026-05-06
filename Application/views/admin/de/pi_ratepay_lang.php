@@ -11,7 +11,7 @@
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
-$aLang = array(
+$aLang = [
     'charset'                                  => 'UTF-8',
     'SHOP_MODULE_GROUP_PI_RATEPAY_GENERAL'     => 'Allgemein',
     'SHOP_MODULE_GROUP_PI_RATEPAY_GERMANY'     => 'Deutschland',
@@ -175,4 +175,4 @@ $aLang = array(
     'PI_RATEPAY_SAVEBANKDATA'                  => "Bankdaten speichern (verschl&uuml;sselt)",
     'PI_RATEPAY_ACTIVATE_ELV'                  => "Lastschrift f&uuml;r Rate aktivieren",
     'PI_RATEPAY_CONFIGSAVESUCCESS'             => "Die Konfiguration wurde erfolgreich aktualisiert.",
-);
+];

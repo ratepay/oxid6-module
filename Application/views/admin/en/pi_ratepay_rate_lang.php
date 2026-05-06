@@ -11,7 +11,7 @@
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
-$aLang = array(
+$aLang = [
     'charset'                                  => 'UTF-8',
     'PI_RATEPAY_RATE_PDF_OWNER'                => "Director:",
     'PI_RATEPAY_RATE_PDF_FON'                  => "Phone:",
@@ -60,4 +60,4 @@ $aLang = array(
     'PI_RATEPAY_RATE_RATE'                     => 'Ratepay Rate',
     'PI_RATEPAY_RATE_PLAN_HINT'                => 'You will receive your installment plan and all payment information separately by email.',
     'PI_RATEPAY_RATE_PAYMENT_HINT'             => 'To do this, please use the account details set up by the retailer for this purpose:'
-);
+];

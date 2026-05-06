@@ -11,7 +11,7 @@
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
-$aLang = array(
+$aLang = [
     'charset'                            => 'UTF-8',
     'PI_RATEPAY_PROFILE_CREDENTIALS'     => "Credentials",
     'PI_RATEPAY_PROFILE_SAVE'            => "Save configuration",
@@ -80,4 +80,4 @@ $aLang = array(
     'PI_RATEPAY_PROFILE_ERROR_DEACTIVATED_BY_REQUEST'   => "This payment method is not activated at Ratepay",
     'PI_RATEPAY_PROFILE_ERROR_CREDENTIALS_INVALID_LIVE' => "The entered access data was rejected by the live gateway",
     'PI_RATEPAY_PROFILE_ERROR_CREDENTIALS_INVALID_INT'  => "The entered access data was rejected by the integration gateway"
-);
+];

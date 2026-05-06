@@ -11,7 +11,7 @@
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
-$aLang = array(
+$aLang = [
     'charset'                                  => 'UTF-8',
     'PI_RATEPAY_RATE_PDF_OWNER'                => "Gesch&auml;ftsf&uuml;hrer:",
     'PI_RATEPAY_RATE_PDF_FON'                  => "Telefon:",
@@ -60,4 +60,4 @@ $aLang = array(
     'PI_RATEPAY_RATE_RATE'                     => 'Ratepay Rate',
     'PI_RATEPAY_RATE_PLAN_HINT'                => 'Ihren Ratenplan und alle Informationen zur Zahlung erhalten Sie gesondert per E-Mail.',
     'PI_RATEPAY_RATE_PAYMENT_HINT'             => 'Bitte nutzen Sie dazu die daf&uuml;r eingerichtete Kontoverbindung des H&auml;ndlers:'
-);
+];

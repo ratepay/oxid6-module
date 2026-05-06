@@ -1,17 +1,19 @@
 <?php
 
+namespace pi\ratepay\Application\Controller\Admin;
+
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Database\QueryBuilderFactoryInterface;
+use pi\ratepay\Application\Model\Logs;
+
+
 /**
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
-namespace pi\ratepay\Application\Controller\Admin;
-
-use OxidEsales\Eshop\Core\DatabaseProvider;
-use pi\ratepay\Application\Model\Logs;
 
 /**
  * RatePAY Logging View
@@ -28,18 +30,21 @@ class LogMain extends AdminViewBase
 {
     /**
      * Current class template name.
+     *
      * @var string
      */
     protected $_sThisTemplate = 'pi_ratepay_log_main.tpl';
 
     /**
      * Name of chosen object class (default null).
+     *
      * @var string
      */
     protected $_sModelClass = Logs::class;
 
     /**
      * DB Table
+     *
      * @var string
      */
     protected $_sTable = 'pi_ratepay_logs';
@@ -50,9 +55,10 @@ class LogMain extends AdminViewBase
      * @param void
      * @return string
      */
-    public function render() {
+    public function render()
+    {
         parent::render();
-        $sSavedID  = $this->_piGetSavedId();
+        $sSavedID = $this->_piGetSavedId();
         $sOxid = $this->_piGetOxid();
 
         $blNotLoaded = (
@@ -69,9 +75,9 @@ class LogMain extends AdminViewBase
 
         if ($blNotLoaded) {
             $sOxid = $sSavedID;
-            $this->_aViewData["oxid"] =  $sOxid;
+            $this->_aViewData["oxid"] = $sOxid;
             // for reloading upper frame
-            $this->_aViewData["updatelist"] =  "1";
+            $this->_aViewData["updatelist"] = "1";
         }
 
         if ($blLoaded) {
@@ -84,7 +90,7 @@ class LogMain extends AdminViewBase
             );
             $oRatePayLogs->load($sOxid);
 
-            $this->_aViewData["edit"] =  $oRatePayLogs;
+            $this->_aViewData["edit"] = $oRatePayLogs;
         }
 
         return $this->_sThisTemplate;
@@ -98,18 +104,21 @@ class LogMain extends AdminViewBase
      */
     public function deleteLogs()
     {
-        $oConfig = $this->getConfig();
-        $oDb = DatabaseProvider::getDb();
-        $sLogDays = $oConfig->getRequestParameter('logdays');
-        $iLogDays = (int) $sLogDays;
+        $oContainer = ContainerFactory::getInstance()->getContainer();
+        /** @var QueryBuilderFactoryInterface $queryBuilderFactory */
+        $oQueryBuilderFactory = $oContainer->get(QueryBuilderFactoryInterface::class);
+        $oQueryBuilder = $oQueryBuilderFactory->create();
+        $oQueryBuilder->delete($this->_sTable);
 
-        $sQuery = "DELETE FROM ".$this->_sTable;
+        $oConfig = $this->getConfig();
+        $sLogDays = $oConfig->getRequestParameter("logdays");
+        $iLogDays = (int)$sLogDays;
 
         if ($iLogDays > 0) {
-            $sQuery .= " WHERE TO_DAYS(now()) - TO_DAYS(date) > ".$iLogDays;
+            $oQueryBuilder->where("TO_DAYS(now()) - TO_DAYS(date) > " . $iLogDays);
         }
 
-        $oDb->execute($sQuery);
+        $oQueryBuilder->execute();
         $this->addTplParam('deleteSuccess', 'Success');
     }
 }

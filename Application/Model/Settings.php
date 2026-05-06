@@ -1,18 +1,20 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Application\Model;
 
 use OxidEsales\Eshop\Core\Field;
 use OxidEsales\Eshop\Core\Model\BaseModel;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
 use pi\ratepay\Core\Utilities;
+
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
  * Model class for pi_ratepay_settings table
@@ -74,13 +76,12 @@ class Settings extends BaseModel
 
         //getting at least one field before lazy loading the object
         $this->_addField('oxid', 0);
-        $whereClause = array(
+        $whereClause = [
             $this->getViewName() . ".shopid" => $shopId,
             $this->getViewName() . ".type" => strtolower($type),
             $this->getViewName() . ".country" => $this->getCountry()
-        );
+        ];
         $selectQuery = $this->buildSelectString($whereClause);
-
         $this->_isLoaded = $this->assignRecord($selectQuery);
 
         return $this->_isLoaded;
@@ -243,26 +244,26 @@ class Settings extends BaseModel
     {
         $sPaymentId = $this->getId();
         if (empty($sPaymentId)) {
-            return array('debit', 'banktransfer', 'both'); // Settings not set yet
+            return ['debit', 'banktransfer', 'both']; // Settings not set yet
         }
 
-        if ($this->pi_ratepay_settings__payment_firstday->value == '2,28') {
-            return array('debit', 'banktransfer', 'both');
-        } elseif ($this->pi_ratepay_settings__payment_firstday->value == '28') {
-            return array('banktransfer');
+        if ($this->getFieldData('payment_firstday') == '2,28') {
+            return ['debit', 'banktransfer', 'both'];
+        } elseif ($this->getFieldData('payment_firstday') == '28') {
+            return ['banktransfer'];
         }
-        return array('debit');
+        return ['debit'];
     }
 
     public function getSettlementType()
     {
-        if (($this->pi_ratepay_settings__type->value != 'installment' && $this->pi_ratepay_settings__type->value != 'installment0') || !in_array($this->pi_ratepay_settings__country->value, array('DE', 'AT'))) {
+        if (($this->getFieldData('type') != 'installment' && $this->getFieldData('type') != 'installment0') || !in_array($this->getFieldData('country'),['DE', 'AT'])) {
             return false;
         }
 
-        if ($this->pi_ratepay_settings__payment_firstday->value == '2,28') {
+        if ($this->getFieldData('payment_firstday') == '2,28') {
             return 'both';
-        } elseif ($this->pi_ratepay_settings__payment_firstday->value == '28') {
+        } elseif ($this->getFieldData('payment_firstday') == '28') {
             return 'banktransfer';
         }
         return 'debit';

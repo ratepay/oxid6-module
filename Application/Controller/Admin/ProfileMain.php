@@ -1,17 +1,16 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Application\Controller\Admin;
 
 use pi\ratepay\Application\Model\Settings;
 
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 class ProfileMain extends AdminViewBase
 {
     /**
@@ -71,6 +70,7 @@ class ProfileMain extends AdminViewBase
                 $this->_sModelClass,
                 getViewName($this->_sModelClass)
             );
+            /** @var Settings $oProfile */
             $oProfile->load($sOxid);
 
             $this->_aViewData["edit"] =  $oProfile;

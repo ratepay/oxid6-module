@@ -4,8 +4,8 @@
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 // -------------------------------
@@ -13,7 +13,7 @@
 // -------------------------------
 $sLangName = "Deutsch";
 
-$aLang = array(
+$aLang = [
     'charset'                                         => 'UTF-8',
     'PI_RATEPAY_ERROR_CONNECTION_TIMEOUT'             => 'Leider ist die Verbindung zu Ratepay derzeit nicht m&ouml;glich, bitte versuchen Sie es zu einem sp&auml;teren Zeitpunkt erneut.',
     'PI_RATEPAY_SHOW_MORE_INFORMATION'                => 'Mehr Informationen',
@@ -28,4 +28,5 @@ $aLang = array(
     'PI_RATEPAY_VIEW_RADIO_PAYMENT_WIRE'              => 'Per &Uuml;berweisung',
     'PI_RATEPAY_VIEW_RATEPAY_ADDRESS'                 => 'Ratepay GmbH, Ritterstra&szlig;e 12-14, 10969 Berlin',
     'PI_RATEPAY_POLICY'                               => "<p>Mit der Auswahl dieser Zahlungsart erkl&auml;ren Sie sich mit den <a href='//www.ratepay.com/legal-payment-terms' title='Legal terms - Ratepay' target='_blank' style='text-decoration: underline; cursor: pointer'>Zahlungsbedingungen unseres Zahlungspartners</a> sowie mit der Durchf&uuml;hrung einer <a href='//www.ratepay.com/legal-payment-dataprivacy' title='Legal data privacy - Ratepay' target='_blank' style='text-decoration: underline; cursor: pointer'>Risikopr&uuml;fung durch unseren Zahlungspartner</a> einverstanden.</p>",
-);
+    'PI_RATEPAY_VIEW_RATEPAY_INFO'                    => 'Mandatsreferenz und Gläubiger-ID wird Ihnen separat mitgeteilt',
+];

@@ -1,13 +1,5 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Extend\Application\Model;
 
 use OxidEsales\Eshop\Application\Model\User;
@@ -22,7 +14,16 @@ use pi\ratepay\Core\Orders;
 use pi\ratepay\Core\PaymentBan;
 use pi\ratepay\Core\RateDetails;
 use pi\ratepay\Core\Utilities;
+use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
+use OxidEsales\EshopCommunity\Internal\Framework\Database\QueryBuilderFactoryInterface;
 
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 class RatepayPaymentGateway extends RatepayPaymentGateway_parent
 {
     /**
@@ -37,28 +38,28 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
      *
      * @var array
      */
-    protected $paymentMethodIds = array(
-        'pi_ratepay_rechnung' => array(
+    protected $paymentMethodIds = [
+        'pi_ratepay_rechnung' => [
             'connection_timeout' => '-418',
             'denied' => '-400',
             'soft' => '-001',
-        ),
-        'pi_ratepay_rate' => array(
+        ],
+        'pi_ratepay_rate' => [
             'connection_timeout' => '-418',
             'denied' => '-407',
             'soft' => '-001',
-        ),
-        'pi_ratepay_rate0' => array(
+        ],
+        'pi_ratepay_rate0' => [
             'connection_timeout' => '-418',
             'denied' => '-407',
             'soft' => '-001',
-        ),
-        'pi_ratepay_elv' => array(
+        ],
+        'pi_ratepay_elv' => [
             'connection_timeout' => '-418',
             'denied' => '-300',
             'soft' => '-001',
-        )
-    );
+        ]
+    ];
 
     /**
      * @param string $sPaymentType
@@ -82,7 +83,7 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
      */
     protected function isRatePayPayment($oOrder)
     {
-        if (in_array($oOrder->oxorder__oxpaymenttype->value, Utilities::$_RATEPAY_PAYMENT_METHOD)) {
+        if (in_array($oOrder->getFieldData('oxpaymenttype'), Utilities::$_RATEPAY_PAYMENT_METHOD)) {
             return true;
         }
         return false;
@@ -121,13 +122,13 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
      */
     protected function handleRatePayPayment($oOrder, $dAmount)
     {
-        $this->_paymentId = $oOrder->oxorder__oxpaymenttype->value;
+        $this->_paymentId = $oOrder->getFieldData('oxpaymenttype');
         $isSandbox = $this->_isSandbox($this->_paymentId);
 
         $modelFactory = oxNew(ModelFactory::class);
         $modelFactory->setPaymentType($this->_paymentId);
         $modelFactory->setSandbox($isSandbox);
-        $modelFactory->setCountryId($this->getUser()->oxuser__oxcountryid->value);
+        $modelFactory->setCountryId($this->getUser()->getFieldData('oxcountryid'));
         $modelFactory->setShopId(Registry::getSession()->getVariable('shopId'));
 
         $payInit = $modelFactory->doOperation('PAYMENT_INIT');
@@ -143,7 +144,7 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
         $this->getSession()->setVariable($this->_paymentId . '_trans_id', $transactionId);
 
         $modelFactory->setTransactionId($transactionId);
-        $modelFactory->setCustomerId($this->getUser()->oxuser__oxcustnr->value);
+        $modelFactory->setCustomerId($this->getUser()->getFieldData('oxcustnr'));
         $modelFactory->setDeviceToken($this->getSession()->getVariable('pi_ratepay_dfp_token'));
         $modelFactory->setBasket($this->getSession()->getBasket());
         $modelFactory->setOrder($oOrder);
@@ -164,16 +165,16 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
             }
 
             // OX-33 : register a payment ban on error codes 703/720/721
-            if (in_array($payRequest->getReasonCode(), array(703, 720, 721))) {
+            if (in_array($payRequest->getReasonCode(), [703, 720, 721])) {
                 $fromDate = (oxNew(\DateTime::class))->format(DATE_ISO8601);
                 $toDate = (oxNew(\DateTime::class, '+2day'))->format(DATE_ISO8601);
 
                 /** @var User $user */
                 $user = oxNew(User::class);
-                $userId = $oOrder->oxorder__oxuserid->value;
+                $userId = $oOrder->getFieldData('oxuserid');
                 $user->load($userId);
-                if ($user->oxuser__oxregister->value == '0000-00-00 00:00:00') {
-                    $userId = $user->oxuser__oxusername->value;
+                if ($user->getFieldData('oxregister') == '0000-00-00 00:00:00') {
+                    $userId = $user->getFieldData('oxusername');
                 }
 
                 /** @var PaymentBan $paymentBan */
@@ -184,12 +185,12 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
                     $paymentBan->pi_ratepay_payment_ban__to_date->rawValue = $toDate;
                 } else {
                     $paymentBan->assign(
-                        array(
+                        [
                             'USERID' => $userId,
                             'PAYMENT_METHOD' => $this->_paymentId,
                             'FROM_DATE' => $fromDate,
                             'TO_DATE' => $toDate
-                        )
+                        ]
                     );
                 }
                 $paymentBan->save();
@@ -214,9 +215,9 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
         $orderLogs = LogsService::getInstance()->getLogsList("transaction_id = " . DatabaseProvider::getDb(true)->quote($tid));
         foreach ($orderLogs as $log) {
             if (!is_null($oOrder->oxorder__oxordernr)) {
-                $log->assign(array('order_number' => $oOrder->oxorder__oxordernr));
+                $log->assign(['order_number' => $oOrder->oxorder__oxordernr]);
             } else {
-                $log->assign(array('order_number' => $this->getSession()->getVariable('pi_ratepay_shops_order_id')));
+                $log->assign(['order_number' => $this->getSession()->getVariable('pi_ratepay_shops_order_id')]);
             }
             $log->save();
         }
@@ -245,13 +246,13 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
         $ratepayOrder = oxNew(Orders::class);
         $ratepayOrder->loadByOrderNumber($id);
 
-        $ratepayOrder->assign(array(
+        $ratepayOrder->assign([
             'order_number' => $id,
             'transaction_id' => $transid,
             'descriptor' => $descriptor,
             'userbirthdate' => $userbirthdate,
             'rp_api' => $api
-        ));
+        ]);
 
         $ratepayOrder->save();
 
@@ -269,7 +270,7 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
             $ratepayRateDetails = oxNew(RateDetails::class);
             $ratepayRateDetails->loadByOrderId($id);
 
-            $ratepayRateDetails->assign(array(
+            $ratepayRateDetails->assign([
                 'orderid' => $id,
                 'totalamount' => $totalAmount,
                 'amount' => $amount,
@@ -280,7 +281,7 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
                 'numberofrates' => $numberOfRates,
                 'rate' => $rate,
                 'lastrate' => $lastRate
-            ));
+            ]);
 
             $ratepayRateDetails->save();
         }
@@ -299,7 +300,7 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
             $ratepayRateDetails = oxNew(RateDetails::class);
             $ratepayRateDetails->loadByOrderId($id);
 
-            $ratepayRateDetails->assign(array(
+            $ratepayRateDetails->assign([
                 'orderid' => $id,
                 'totalamount' => $totalAmount,
                 'amount' => $amount,
@@ -310,7 +311,7 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
                 'numberofrates' => $numberOfRates,
                 'rate' => $rate,
                 'lastrate' => $lastRate
-            ));
+            ]);
 
             $ratepayRateDetails->save();
         }
@@ -326,7 +327,15 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
      */
     private function _saveRatepayBasketItems($id, $oOrder)
     {
-        DatabaseProvider::getDb()->execute("DELETE FROM `pi_ratepay_order_details` where order_number = ?", array($id));
+        $oContainer = ContainerFactory::getInstance()->getContainer();
+        /** @var QueryBuilderFactoryInterface $queryBuilderFactory */
+        $oQueryBuilderFactory = $oContainer->get(QueryBuilderFactoryInterface::class);
+        $oQueryBuilder = $oQueryBuilderFactory->create();
+        $oQueryBuilder
+            ->delete('pi_ratepay_order_details')
+            ->where('order_number = :ordernr')
+            ->setParameter(':ordernr', $id);
+        $oQueryBuilder->execute();
 
         $oBasket = $this->getSession()->getBasket();
         foreach ($oOrder->getOrderArticles() AS $article) {
@@ -335,7 +344,7 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
             $this->_saveToRatepayOrderDetails($id, $articlenumber, $article->getId(), $quantity);
         }
 
-        $specialItems = array('oxwrapping', 'oxgiftcard', 'oxdelivery', 'oxpayment', 'oxtsprotection');
+        $specialItems = ['oxwrapping', 'oxgiftcard', 'oxdelivery', 'oxpayment', 'oxtsprotection'];
         foreach ($specialItems as $articleNumber) {
             $this->_checkBasketCosts($id, $articleNumber);
         }
@@ -379,14 +388,14 @@ class RatepayPaymentGateway extends RatepayPaymentGateway_parent
     {
         $ratepayOrderDetails = oxNew(OrderDetails::class);
 
-        $ratepayOrderDetails->assign(array(
+        $ratepayOrderDetails->assign([
             'order_number' => $id,
             'article_number' => $articleNumber,
             'unique_article_number' => $uniqueArticleNumber,
             'price' => $price,
             'vat' => $vat,
             'ordered' => $quantity
-        ));
+        ]);
 
         $ratepayOrderDetails->save();
     }

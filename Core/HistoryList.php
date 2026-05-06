@@ -1,16 +1,16 @@
 <?php
 
+namespace pi\ratepay\Core;
+
+use OxidEsales\Eshop\Core\Model\ListModel;
+
 /**
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
-namespace pi\ratepay\Core;
-
-use OxidEsales\Eshop\Core\Model\ListModel;
 
 /**
  * Generate iterable list of history model objects
@@ -42,10 +42,10 @@ class HistoryList extends ListModel
     {
         $oListObject = $this->getBaseObject();
         $sFieldList = $oListObject->getSelectFields();
-        $sQ = "select $sFieldList from " . $oListObject->getViewName();
+        $sQ = "SELECT $sFieldList FROM " . $oListObject->getViewName();
 
         if ($where != null) {
-            $sQ .= " where $where ";
+            $sQ .= " WHERE $where ";
         }
         $this->selectString($sQ);
 

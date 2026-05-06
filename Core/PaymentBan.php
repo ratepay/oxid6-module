@@ -1,16 +1,16 @@
 <?php
 
+namespace pi\ratepay\Core;
+
+use OxidEsales\Eshop\Core\Model\BaseModel;
+
 /**
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
-namespace pi\ratepay\Core;
-
-use OxidEsales\Eshop\Core\Model\BaseModel;
 
 /**
  * Model class for pi_ratepay_payment_ban table
@@ -45,8 +45,10 @@ class PaymentBan extends BaseModel
     public function loadByUserAndMethod($userid, $paymentMethod)
     {
         //getting at least one field before lazy loading the object
-        $this->_addField('OXID', 0);
-        $selectQuery = $this->buildSelectString(array($this->getViewName() . ".USERID" => $userid, $this->getViewName() . ".PAYMENT_METHOD" => $paymentMethod));
+        $this->_addField('oxid', 0);
+        $selectQuery = $this->buildSelectString(
+            [$this->getViewName() . ".USERID" => $userid, $this->getViewName() . ".PAYMENT_METHOD" => $paymentMethod]
+        );
 
         return $this->_isLoaded = $this->assignRecord($selectQuery);
     }
