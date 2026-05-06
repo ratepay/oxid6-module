@@ -4,8 +4,6 @@ namespace pi\ratepay\Application\Model;
 
 use OxidEsales\Eshop\Core\Field;
 use OxidEsales\Eshop\Core\Model\BaseModel;
-use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
-use OxidEsales\EshopCommunity\Internal\Framework\Module\Facade\ModuleSettingServiceInterface;
 use pi\ratepay\Core\Utilities;
 
 /**

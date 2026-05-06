@@ -278,7 +278,6 @@ class Details extends AdminDetailsController
 
         $historyList = [];
 
-        /** @var History $historyItem */
         foreach ($ratepayHistoryList as $historyItem) {
             $title = '';
             $articleNumber = '';
