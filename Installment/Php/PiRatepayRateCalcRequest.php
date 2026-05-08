@@ -16,6 +16,7 @@
     $calcMethod = $pi_calculator->getPostParameter('calcMethod');
     $bankAccount = $pi_calculator->getPostParameter('bankAccount');
     $paymentFirstday = $pi_calculator->getPostParameter('paymentFirstday');
+    $cl = $pi_calculator->getPostParameter('cl') == 'null' || $pi_calculator->getPostParameter('cl') == ''  ? 'order' : $pi_calculator->getPostParameter('cl');
 
     $sPaymentMethod = $pi_calculator->getPaymentMethod();
 
@@ -59,7 +60,7 @@
         }
     } else {
         $bShowPiResultArray = false;
-        if ($pi_calculator->getPostParameter('cl') == 'order' || !empty($calcValue)) {
+        if ($cl == 'order' || !empty($calcValue)) {
             $bShowPiResultArray = true;
         } else {
             $pi_calculator->setErrorMsg('novalue');
