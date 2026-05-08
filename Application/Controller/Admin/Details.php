@@ -244,14 +244,10 @@ class Details extends AdminDetailsController
     public function credit()
     {
         $voucherAmount = Registry::getConfig()->getRequestParameter('voucherAmount');
-        $voucherKomma = Registry::getConfig()->getRequestParameter('voucherAmountKomma');
 
         $this->_initRatepayDetails($this->getEditObject());
-
-        if (isset($voucherAmount) && preg_match("/^[0-9]{1,4}$/", $voucherAmount)) {
-            $voucherKomma = isset($voucherKomma) && preg_match('/^[0-9]{1,2}$/', $voucherKomma) ? $voucherKomma : '00';
-
-            $voucherAmount .= '.' . $voucherKomma;
+        $voucherAmount = str_replace(",", ".", $voucherAmount);
+        if (isset($voucherAmount) && preg_match("/^[0-9]{1,4}[\.,]{0,1}[0-9]{0,2}$/", $voucherAmount)) {
             $voucherAmount = (double)$voucherAmount;
 
             if ($voucherAmount <= $this->getEditObject()->getTotalOrderSum() && $voucherAmount > 0) {
