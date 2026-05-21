@@ -4,8 +4,8 @@
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 // -------------------------------
@@ -13,7 +13,7 @@
 // -------------------------------
 $sLangName = "English";
 
-$aLang = array(
+$aLang = [
     'charset'                                         => 'UTF-8',
     'PI_RATEPAY_ERROR_CONNECTION_TIMEOUT'             => 'Unfortunately the connection to Ratepay is currently not possible, please try again later.',
     'PI_RATEPAY_SHOW_MORE_INFORMATION'                => 'More information',
@@ -27,5 +27,6 @@ $aLang = array(
     'PI_RATEPAY_VIEW_RADIO_LABEL_ELV'                 => 'By direct debit',
     'PI_RATEPAY_VIEW_RADIO_PAYMENT_WIRE'              => 'By bank transfer',
     'PI_RATEPAY_VIEW_RATEPAY_ADDRESS'                 => 'Ratepay GmbH, Ritterstra&szlig;e 12-14, 10969 Berlin',
-    'PI_RATEPAY_POLICY'                               => "<p>With selection of these payment method you agree to the <a href='//www.ratepay.com/en/ratepay-terms-of-payment' title='Legal terms - Ratepay' target='_blank' style='text-decoration: underline; cursor: pointer'>terms of payment of our payment partner</a> as well as to the performance of a <a href='//www.ratepay.com/en/ratepay-data-privacy-statement' title='Legal data privacy - Ratepay' target='_blank' style='text-decoration: underline; cursor: pointer'>risk check by our payment partner</a>.</p>"
-);
+    'PI_RATEPAY_POLICY'                               => "<p>With selection of these payment method you agree to the <a href='//www.ratepay.com/en/ratepay-terms-of-payment' title='Legal terms - Ratepay' target='_blank' style='text-decoration: underline; cursor: pointer'>terms of payment of our payment partner</a> as well as to the performance of a <a href='//www.ratepay.com/en/ratepay-data-privacy-statement' title='Legal data privacy - Ratepay' target='_blank' style='text-decoration: underline; cursor: pointer'>risk check by our payment partner</a></p>.",
+    'PI_RATEPAY_VIEW_RATEPAY_INFO'                    => 'The mandate reference and creditor identifier will be communicated to you separately',
+];

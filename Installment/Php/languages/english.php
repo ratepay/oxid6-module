@@ -4,10 +4,9 @@
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
 $rp_runtime_title = "Duration";
 $rp_runtime_description = "Number of monthly installments";
 $rp_rate_title = "Installment amount";
@@ -85,6 +84,7 @@ $wcd_sepa_terms_block_3 = "My rights are explained in a statement that I can obt
 $rp_sepa_terms_block_21 = "I hereby authorise Ratepay GmbH to collect payments from my account by direct debit. At the same time, I authorise my bank to debit my account in accordance with the instructions from Ratepay GmbH.";
 $rp_sepa_terms_block_22 = "Note: As part of my rights, I am entitled to a refund from my bank under the terms and conditions of my agreement with my bank. A refund must be claimed within 8 weeks starting from the date on which my account was debited.";
 $rp_sepa_terms_block_23 = "My rights are explained in a statement that I can obtain from my bank.";
+$rp_creditor_info = "The mandate reference and creditor identifier will be communicated to you separately.";
 $pi_lang_error = "<b>Error</b>";
 $pi_lang_server_off = "The RatePAY servers are currently unavailable. Please try again later.";
 $pi_lang_wrong_value = "Wrong entry. Please change your entry.";

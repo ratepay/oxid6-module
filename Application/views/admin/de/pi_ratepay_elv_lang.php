@@ -4,14 +4,13 @@
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
-$aLang = array(
+$aLang = [
     'charset'                                => 'UTF-8',
     'PI_RATEPAY_ELV_PDF_OWNER'               => "Gesch&auml;ftsf&uuml;hrer:",
     'PI_RATEPAY_ELV_PDF_FON'                 => "Telefon:",
@@ -58,4 +57,4 @@ $aLang = array(
     'PI_RATEPAY_ELV_PDF_ADDITIONALINFO_2'    => "Ihrer Bestellung einschlie&szlig;lich etwaiger Nebenforderungen an die Ratepay GmbH abgetreten. Forderungsinhaber",
     'PI_RATEPAY_ELV_PDF_ADDITIONALINFO_3'    => "ist damit Ratepay GmbH. Eine schuldbefreiende Leistung durch Zahlung ist gem&auml;&szlig; § 407 B&uuml;rgerliches Gesetzbuch",
     'PI_RATEPAY_ELV_PDF_ADDITIONALINFO_4'    => "durch Sie nur an die Ratepay GmbH m&ouml;glich."
-);
+];

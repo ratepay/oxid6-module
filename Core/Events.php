@@ -1,18 +1,18 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Core;
 
 use OxidEsales\Eshop\Application\Model\Shop;
 use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\EshopCommunity\Core\DatabaseProvider;
+
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
  * Eventhandler for module activation and deactivation.
@@ -151,12 +151,12 @@ class Events
           UNIQUE INDEX `UNQ_RATEPAY_CUSTOMER_ID_PAYMENT_METHOD` (`USERID` ASC, `PAYMENT_METHOD` ASC)
         ) ENGINE = MYISAM CHARACTER SET utf8 COLLATE utf8_general_ci;";
 
-    public static $aPaymentMethods = array(
+    public static $aPaymentMethods = [
         'pi_ratepay_rechnung' => 'Ratepay Rechnung',
         'pi_ratepay_rate' => 'Ratepay Rate',
         'pi_ratepay_rate0' => 'Ratepay 0% Finanzierung',
         'pi_ratepay_elv' => 'Ratepay SEPA-Lastschrift',
-    );
+    ];
 
     /**
      * Execute action on activate event.
@@ -222,11 +222,11 @@ class Events
     {
         foreach (self::$aPaymentMethods as $sPaymentOxid => $sPaymentName) {
             //INSERT PAYMENT METHOD
-            self::insertRowIfNotExists('oxpayments', array('OXID' => $sPaymentOxid), "INSERT INTO oxpayments (OXID, OXACTIVE, OXDESC, OXADDSUM, OXADDSUMTYPE, OXFROMBONI, OXFROMAMOUNT, OXTOAMOUNT, OXVALDESC, OXCHECKED, OXDESC_1, OXVALDESC_1, OXDESC_2, OXVALDESC_2, OXDESC_3, OXVALDESC_3, OXLONGDESC, OXLONGDESC_1, OXLONGDESC_2, OXLONGDESC_3, OXSORT) VALUES ('{$sPaymentOxid}', 1, '{$sPaymentName}', 0, 'abs', 0, 0, 999999, '', 1, '{$sPaymentName}', '', '', '', '', '', '', '', '', '', 0)");
-            self::insertRowIfNotExists('oxobject2payment', array('OXPAYMENTID' => $sPaymentOxid, 'OXTYPE' => 'oxdelset'), "INSERT INTO oxobject2payment(OXID,OXPAYMENTID,OXOBJECTID,OXTYPE) values (MD5(CONCAT(NOW(),RAND())), '{$sPaymentOxid}', 'oxidstandard', 'oxdelset');");
+            self::insertRowIfNotExists('oxpayments', ['OXID' => $sPaymentOxid], "INSERT INTO oxpayments (OXID, OXACTIVE, OXDESC, OXADDSUM, OXADDSUMTYPE, OXFROMBONI, OXFROMAMOUNT, OXTOAMOUNT, OXVALDESC, OXCHECKED, OXDESC_1, OXVALDESC_1, OXDESC_2, OXVALDESC_2, OXDESC_3, OXVALDESC_3, OXLONGDESC, OXLONGDESC_1, OXLONGDESC_2, OXLONGDESC_3, OXSORT) VALUES ('{$sPaymentOxid}', 1, '{$sPaymentName}', 0, 'abs', 0, 0, 999999, '', 1, '{$sPaymentName}', '', '', '', '', '', '', '', '', '', 0)");
+            self::insertRowIfNotExists('oxobject2payment', ['OXPAYMENTID' => $sPaymentOxid, 'OXTYPE' => 'oxdelset'], "INSERT INTO oxobject2payment(OXID,OXPAYMENTID,OXOBJECTID,OXTYPE) values (MD5(CONCAT(NOW(),RAND())), '{$sPaymentOxid}', 'oxidstandard', 'oxdelset');");
         }
 
-        self::insertRowIfNotExists('oxvoucherseries', array('OXID' => 'pi_ratepay_voucher'), "INSERT INTO `oxvoucherseries` (OXID,OXSHOPID,OXSERIENR,OXSERIEDESCRIPTION,OXDISCOUNT,OXDISCOUNTTYPE,OXBEGINDATE,OXENDDATE,OXALLOWSAMESERIES,OXALLOWOTHERSERIES,OXALLOWUSEANOTHER,OXMINIMUMVALUE,OXCALCULATEONCE,OXTIMESTAMP) VALUES ('pi_ratepay_voucher', 1, 'Ratepay Gutschrift-Platzhalter - bitte nicht verwenden', 'Ratepay Gutschrift-Platzhalter - bitte nicht verwenden', 0.00, 'absolute', '2010-01-01 00:00:01', '2099-01-01 00:00:01', 1, 1, 1, 0.00, 0, NOW());");
+        self::insertRowIfNotExists('oxvoucherseries', ['OXID' => 'pi_ratepay_voucher'], "INSERT INTO `oxvoucherseries` (OXID,OXSHOPID,OXSERIENR,OXSERIEDESCRIPTION,OXDISCOUNT,OXDISCOUNTTYPE,OXBEGINDATE,OXENDDATE,OXALLOWSAMESERIES,OXALLOWOTHERSERIES,OXALLOWUSEANOTHER,OXMINIMUMVALUE,OXCALCULATEONCE,OXTIMESTAMP) VALUES ('pi_ratepay_voucher', 1, 'Ratepay Gutschrift-Platzhalter - bitte nicht verwenden', 'Ratepay Gutschrift-Platzhalter - bitte nicht verwenden', 0.00, 'absolute', '2010-01-01 00:00:01', '2099-01-01 00:00:01', 1, 1, 1, 0.00, 0, NOW());");
     }
 
     /**
@@ -291,7 +291,7 @@ class Events
     {
         $aTables = DatabaseProvider::getDb()->getAll("SHOW TABLES LIKE '{$sTableName}'");
         if (!$aTables || count($aTables) == 0) {
-            DatabaseProvider::getDb()->Execute($sQuery);
+            DatabaseProvider::getDb()->execute($sQuery);
             return true;
         }
         return false;
@@ -300,19 +300,19 @@ class Events
     /**
      * Drop DB-table if it exists
      *
-     * @param  string $sTableName
+     * @param string $sTableName
      * @return void
      */
     public static function dropTable($sTableName)
     {
-        DatabaseProvider::getDb()->Execute("DROP TABLE IF EXISTS `{$sTableName}`;");
+        DatabaseProvider::getDb()->execute("DROP TABLE IF EXISTS `{$sTableName}`;");
     }
 
     /**
      * Check database if column exists
      *
-     * @param  string $sTableName
-     * @param  string $sColumnName
+     * @param string $sTableName
+     * @param string $sColumnName
      * @return bool
      */
     public static function checkIfColumnExists($sTableName, $sColumnName)
@@ -337,7 +337,7 @@ class Events
     {
         if (self::checkIfColumnExists($sTableName, $sColumnName) === false) {
             try {
-                DatabaseProvider::getDb()->Execute($sQuery);
+                DatabaseProvider::getDb()->execute($sQuery);
             } catch (\Exception $e) {}
             return true;
         }
@@ -357,7 +357,7 @@ class Events
     {
         if (self::checkIfColumnExists($sTableName, $sColumnName) === true) {
             try {
-                DatabaseProvider::getDb()->Execute($sQuery);
+                DatabaseProvider::getDb()->execute($sQuery);
             } catch (\Exception $e) {}
             return true;
         }
@@ -367,15 +367,15 @@ class Events
     /**
      * Drop column if exists
      *
-     * @param  string $sTableName
-     * @param  string $sColumnName
+     * @param string $sTableName
+     * @param string $sColumnName
      * @return bool
      */
     public static function dropColumnIfExists($sTableName, $sColumnName)
     {
         if (self::checkIfColumnExists($sTableName, $sColumnName) === true) {
             try {
-                DatabaseProvider::getDb()->Execute("ALTER TABLE `{$sTableName}` DROP `{$sColumnName}`;");
+                DatabaseProvider::getDb()->execute("ALTER TABLE `{$sTableName}` DROP `{$sColumnName}`;");
             } catch (\Exception $e) {}
             return true;
         }
@@ -385,21 +385,21 @@ class Events
     /**
      * Check charset of a given column and change it if needed
      *
-     * @param  string $sTableName
-     * @param  string $sColumnName
-     * @param  string $sNeededCharset
-     * @param  string $sQuery
+     * @param string $sTableName
+     * @param string $sColumnName
+     * @param string $sNeededCharset
+     * @param string $sQuery
      * @return void
      */
     public static function changeCharsetIfNeeded($sTableName, $sColumnName, $sNeededCharset, $sQuery)
     {
         $sCheckQuery = 'SELECT character_set_name FROM information_schema.`COLUMNS` 
-                        WHERE table_schema = "'.Registry::getConfig()->getConfigParam('dbName').'"
-                          AND table_name = "'.$sTableName.'"
-                          AND column_name = "'.$sColumnName.'";';
+                        WHERE table_schema = "' . Registry::getConfig()->getConfigParam('dbName') . '"
+                          AND table_name = "' . $sTableName . '"
+                          AND column_name = "' . $sColumnName . '";';
         $sCurrentCharset = DatabaseProvider::getDb()->getOne($sCheckQuery);
         if ($sCurrentCharset != $sNeededCharset) {
-            DatabaseProvider::getDb()->Execute($sQuery);
+            DatabaseProvider::getDb()->execute($sQuery);
         }
     }
 
@@ -438,8 +438,8 @@ class Events
     public static function deactivePaymethods()
     {
         $sPaymenthodIds = "'" . implode("','", array_keys(self::$aPaymentMethods)) . "'";
-        $sQ = "update oxpayments set oxactive = 0 where oxid in ($sPaymenthodIds)";
-        DatabaseProvider::getDB()->Execute($sQ);
+        $sQ = "UPDATE oxpayments SET oxactive = 0 WHERE oxid IN ($sPaymenthodIds)";
+        DatabaseProvider::getDB()->execute($sQ);
     }
 
     /**
@@ -450,21 +450,21 @@ class Events
         // Changes from 5.0.8 and later
 
         // OX-42 renaming/rebranding
-        $aRenamingCriteria = array(
+        $aRenamingCriteria = [
             'pi_ratepay_rechnung' => 'RatePAY Rechnung',
             'pi_ratepay_rate' => 'RatePAY Rate',
             'pi_ratepay_elv' => 'RatePAY SEPA-Lastschrift',
-        );
+        ];
         foreach (self::$aPaymentMethods as $sCode => $sName) {
             if (!isset($aRenamingCriteria[$sCode])) {
                 continue;
             }
             self::updateDataIfExists(
                 'oxpayments',
-                array('OXID' => $sCode),
+                ['OXID' => $sCode],
                 'OXDESC',
                 $sName,
-                array('OXDESC' => $aRenamingCriteria[$sCode])
+                ['OXDESC' => $aRenamingCriteria[$sCode]]
             );
         }
     }
@@ -472,12 +472,11 @@ class Events
     /**
      * Insert a database row to an existing table.
      *
-     * @param string $sTableName database table name
-     * @param array $aKeyValue keys of rows to change
+     * @param string $sTableName  database table name
+     * @param array  $aKeyValue   keys of rows to change
      * @param string $sColumnName the column name to change, used also to existence check
      * @param string $sValue
-     *
-     * @param $aCriteria
+     * @param        $aCriteria
      * @return bool
      */
     public static function updateDataIfExists($sTableName, $aKeyValue, $sColumnName, $sValue, $aCriteria)
@@ -495,7 +494,7 @@ class Events
         }
         $sQ = "UPDATE {$sTableName} SET {$sColumnName} = '{$sValue}' WHERE 1" . $sWhere;
         try {
-            DatabaseProvider::getDB()->Execute($sQ);
+            DatabaseProvider::getDB()->execute($sQ);
         } catch (\Exception $oEx) {
             return false;
         }

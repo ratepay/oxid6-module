@@ -1,17 +1,17 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Installment\Php;
 
 use OxidEsales\Eshop\Core\Registry;
 use pi\ratepay\Application\Model\Settings;
+
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 if (!function_exists('getShopBasePath')) {
 
@@ -261,7 +261,7 @@ class PiRatepayRateCalcData implements PiRatepayRateCalcDataInterface
      */
     public function getData()
     {
-        $array = array(
+        $array = [
             'total_amount'           => Registry::getSession()->getVariable($this->paymentMethod . '_total_amount'),
             'amount'                 => Registry::getSession()->getVariable($this->paymentMethod . '_amount'),
             'interest_rate'          => Registry::getSession()->getVariable($this->paymentMethod . '_interest_rate'),
@@ -274,7 +274,7 @@ class PiRatepayRateCalcData implements PiRatepayRateCalcDataInterface
             'last_rate'              => Registry::getSession()->getVariable($this->paymentMethod . '_last_rate'),
             'payment_firstday'       => Registry::getSession()->getVariable($this->paymentMethod . '_payment_firstday'),
             'bank_iban'              => Registry::getSession()->getVariable($this->paymentMethod . '_bank_iban')
-        );
+        ];
         return $array;
     }
 

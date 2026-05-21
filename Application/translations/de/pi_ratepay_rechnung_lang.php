@@ -4,8 +4,8 @@
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 // -------------------------------
@@ -19,7 +19,7 @@ $piErrorPhone = 'Um eine Zahlung per Ratepay Rechnung durchzuf&uuml;hren, geben 
 $piErrorCompany = 'Geben Sie bitte Ihren Firmennamen und Ihre Umsatzsteuer-ID ein.';
 $piErrorBirthdayDigits = 'Geben Sie bitte Ihr Geburtsjahr vierstellig ein. (z.B. 1982)';
 
-$aLang = array(
+$aLang = [
     'charset'                                            => 'UTF-8',
     'PI_RATEPAY_RECHNUNG_VIEW_SANDBOX_NOTIFICATION'      => 'Testmodus aktiviert, bitte nutzen Sie diese Zahlart NICHT f&uuml;r die Bestellung und informieren den H&auml;ndler &uuml;ber diese Nachricht.',
     'PI_RATEPAY_RECHNUNG_VIEW_POLICY_TEXT_1'             => 'Ich habe die ',
@@ -49,4 +49,4 @@ $aLang = array(
     'PI_RATEPAY_RECHNUNG_VIEW_PAYMENT_UST'               => 'USt-IdNr.',
     'PI_RATEPAY_ERROR_BIRTHDAY_YEAR_DIGITS'              => $piErrorBirthdayDigits,
     'PI_RATEPAY_ERROR_COMPANY'                           => $piErrorCompany
-);
+];

@@ -4,8 +4,8 @@
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 // -------------------------------
@@ -19,7 +19,7 @@ $piErrorPhone = 'Um eine Zahlung per Ratepay SEPA-Lastschrift durchzuf&uuml;hren
 $piErrorCompany = 'Geben Sie bitte Ihren Firmennamen und Ihre Umsatzsteuer-ID ein.';
 $piErrorBirthdayDigits = 'Geben Sie bitte Ihr Geburtsjahr vierstellig ein. (z.B. 1982)';
 
-$aLang = array(
+$aLang = [
     'charset'                                       => 'UTF-8',
     'PI_RATEPAY_ELV_VIEW_SANDBOX_NOTIFICATION'      => 'Testmodus aktiviert, bitte nutzen Sie diese Zahlart NICHT f&uuml;r die Bestellung und informieren den H&auml;ndler &uuml;ber diese Nachricht.',
     'PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION'    => 'Mandatsreferenz und Gläubiger-ID wird Ihnen separat mitgeteilt.',
@@ -61,4 +61,4 @@ $aLang = array(
     'PI_RATEPAY_ELV_VIEW_BANK_CODE'                 => "BLZ:",
     'PI_RATEPAY_ELV_SEPA_ACCOUNT_INFORMATION'       => 'SEPA Kontodaten',
     'PI_RATEPAY_ELV_CLASSIC_ACCOUNT_INFORMATION'    => 'Klassische Kontodaten',
-);
+];

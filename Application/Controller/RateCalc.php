@@ -1,17 +1,17 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Application\Controller;
 
 use OxidEsales\Eshop\Application\Controller\FrontendController;
 use OxidEsales\Eshop\Core\Registry;
+
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
  * RatePAY Rate (installment) manager. Checks if basket is set, if user is set
@@ -71,7 +71,7 @@ class RateCalc extends FrontendController
 
         $oBasket = $this->getSession()->getBasket();
         if ($myConfig->getConfigParam('blPsBasketReservationEnabled')
-            && (!$oBasket || ( $oBasket && !$oBasket->getProductsCount() ))
+            && (!$oBasket || ($oBasket && !$oBasket->getProductsCount()))
         ) {
             Registry::getUtils()->redirect(
                 $myConfig->getShopHomeURL() . 'cl=basket'
@@ -81,7 +81,7 @@ class RateCalc extends FrontendController
         $oUser = $this->getUser();
         if (!$oBasket
             || !$oUser
-            || ( $oBasket && !$oBasket->getProductsCount() )
+            || ($oBasket && !$oBasket->getProductsCount())
         ) {
             Registry::getUtils()->redirect(
                 $myConfig->getShopHomeURL() . 'cl=start'
@@ -98,7 +98,7 @@ class RateCalc extends FrontendController
         $checking = true;
 
         // test for these variables in session
-        $ratepaySessionVariables = array(
+        $ratepaySessionVariables = [
             'pi_ratepay_rate_total_amount',
             'pi_ratepay_rate_amount',
             'pi_ratepay_rate_interest_amount',
@@ -107,8 +107,8 @@ class RateCalc extends FrontendController
             'pi_ratepay_rate_monthly_debit_interest',
             'pi_ratepay_rate_number_of_rates',
             'pi_ratepay_rate_rate',
-            'pi_ratepay_rate_last_rate'
-        );
+            'pi_ratepay_rate_last_rate',
+        ];
 
         foreach ($ratepaySessionVariables as $sessionVariable) {
             if (!$this->getSession()->hasVariable($sessionVariable)

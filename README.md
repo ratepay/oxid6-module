@@ -50,3 +50,4 @@
 
 ### Version 6.0.0 - Released 2021-02-05
 * Initial release of standalone OXID 6 plugin
+

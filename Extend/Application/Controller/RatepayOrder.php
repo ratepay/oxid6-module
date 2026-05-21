@@ -1,16 +1,16 @@
 <?php
 
+namespace pi\ratepay\Extend\Application\Controller;
+
+use OxidEsales\Eshop\Core\Registry;
+
 /**
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
-namespace pi\ratepay\Extend\Application\Controller;
-
-use OxidEsales\Eshop\Core\Registry;
 
 /**
  * {@inheritdoc}
@@ -22,6 +22,11 @@ use OxidEsales\Eshop\Core\Registry;
  */
 class RatepayOrder extends RatepayOrder_parent
 {
+    /**
+     * Loads basket \OxidEsales\Eshop\Core\Session::getBasket(), sets $this->oBasket->blCalcNeeded = true to
+     * recalculate, sets back basket to session \OxidEsales\Eshop\Core\Session::setBasket(), executes
+     * parent::init().
+     */
     public function init()
     {
         parent::init();

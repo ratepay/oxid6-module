@@ -4,14 +4,14 @@
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
 
 // -------------------------------
 // RESOURCE IDENTITFIER = STRING
 // -------------------------------
-$aLang = array(
+$aLang = [
     'charset'                                     => 'UTF-8',
     'PI_RATEPAY_RECHNUNG_PDF_OWNER'               => "Gesch&auml;ftsf&uuml;hrer:",
     'PI_RATEPAY_RECHNUNG_PDF_FON'                 => "Telefon:",
@@ -56,4 +56,4 @@ $aLang = array(
     'PI_RATEPAY_RECHNUNG_SETTINGS_WIDER'          => 'Widerrufsrecht URL',
     'PI_RATEPAY_RECHNUNG_LOGGING'                 => 'Logging',
     'PI_RATEPAY_RECHNUNG_RECHNUNG'                => 'Ratepay Rechnung'
-);
+];

@@ -1,16 +1,16 @@
 <?php
 
+namespace pi\ratepay\Application\Model;
+
+use OxidEsales\Eshop\Core\Model\BaseModel;
+
 /**
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
-namespace pi\ratepay\Application\Model;
-
-use OxidEsales\Eshop\Core\Model\BaseModel;
 
 /**
  * Model class for pi_ratepay_logs table

@@ -1,17 +1,16 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Application\Controller\Admin;
 
 use pi\ratepay\Application\Model\Logs;
 
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 class LogList extends AdminListBase
 {
     /**
@@ -34,8 +33,8 @@ class LogList extends AdminListBase
      * @return null
      */
     public function init() {
-        $oConfig = $this->getConfig();
         $this->_sDefSort = "DATE";
+        $oConfig = $this->getConfig();
         $sSortCol = $oConfig->getRequestParameter('sort');
 
         if (!$sSortCol || $sSortCol == $this->_sDefSort) {

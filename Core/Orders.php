@@ -1,16 +1,16 @@
 <?php
 
+namespace pi\ratepay\Core;
+
+use OxidEsales\Eshop\Core\Model\BaseModel;
+
 /**
  *
  * Copyright (c) Ratepay GmbH
  *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
  */
-
-namespace pi\ratepay\Core;
-
-use OxidEsales\Eshop\Core\Model\BaseModel;
 
 /**
  * Model class for pi_ratepay_orders table
@@ -45,7 +45,7 @@ class Orders extends BaseModel
     {
         //getting at least one field before lazy loading the object
         $this->_addField('oxid', 0);
-        $selectQuery = $this->buildSelectString(array($this->getViewName() . ".order_number" => $orderNumber));
+        $selectQuery = $this->buildSelectString([$this->getViewName() . ".order_number" => $orderNumber]);
 
         return $this->_isLoaded = $this->assignRecord($selectQuery);
     }

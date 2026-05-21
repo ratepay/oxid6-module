@@ -1,19 +1,19 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Core;
 
 use OxidEsales\Eshop\Core\Base;
 use OxidEsales\Eshop\Core\Registry;
 use pi\ratepay\Application\Model\Logs;
 use pi\ratepay\Application\Model\LogsList;
+
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 
 /**
  * Logging service class
@@ -104,7 +104,7 @@ class LogsService extends Base
 
             $oUtilsDate = Registry::get("oxUtilsDate");
 
-            $logEntry->assign(array(
+            $logEntry->assign([
                 'order_number'    => $orderId,
                 'transaction_id'  => $transactionId,
                 'payment_method'  => $paymentMethod,
@@ -122,7 +122,7 @@ class LogsService extends Base
                 'status_code'     => $statusCode,
                 'reference'       => $reference,
                 'date'            => date('Y-m-d H:i:s', $oUtilsDate->getTime())
-            ));
+            ]);
 
             $logEntry->save();
             return $logEntry;

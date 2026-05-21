@@ -1,19 +1,18 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Extend\Application\Model;
 
 use OxidEsales\Eshop\Application\Model\Basket;
 use OxidEsales\Eshop\Application\Model\UserPayment;
 use OxidEsales\Eshop\Core\Counter;
 
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 class RatepayOxorder extends RatepayOxorder_parent
 {
     /**
@@ -26,15 +25,15 @@ class RatepayOxorder extends RatepayOxorder_parent
      */
     protected function _executePayment(Basket $oBasket, $oUserpayment)
     {
-        if ($oUserpayment->oxuserpayments__oxpaymentsid->value  == "pi_ratepay_rate"
-            || $oUserpayment->oxuserpayments__oxpaymentsid->value  == "pi_ratepay_rate0"
-            || $oUserpayment->oxuserpayments__oxpaymentsid->value == "pi_ratepay_rechnung"
-            || $oUserpayment->oxuserpayments__oxpaymentsid->value == "pi_ratepay_elv"
+        if ($oUserpayment->getFieldData('oxpaymentsid')  == "pi_ratepay_rate"
+            || $oUserpayment->getFieldData('oxpaymentsid')  == "pi_ratepay_rate0"
+            || $oUserpayment->getFieldData('oxpaymentsid') == "pi_ratepay_rechnung"
+            || $oUserpayment->getFieldData('oxpaymentsid') == "pi_ratepay_elv"
         ) {
-            if (!$this->oxorder__oxordernr->value) {
+            if (!$this->getFieldData('oxordernr')) {
                 $this->_setNumber();
             } else {
-                oxNew(Counter::class)->update($this->_getCounterIdent(), $this->oxorder__oxordernr->value);
+                oxNew(Counter::class)->update($this->_getCounterIdent(), $this->getFieldData('oxordernr'));
             }
         }
 

@@ -1,17 +1,16 @@
 <?php
 
-/**
- *
- * Copyright (c) Ratepay GmbH
- *
- *For the full copyright and license information, please view the LICENSE
- *file that was distributed with this source code.
- */
-
 namespace pi\ratepay\Application\Controller\Admin;
 
 use OxidEsales\Eshop\Application\Controller\Admin\AdminController;
 
+/**
+ *
+ * Copyright (c) Ratepay GmbH
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 abstract class AdminViewBase extends AdminController
 {
     /**
