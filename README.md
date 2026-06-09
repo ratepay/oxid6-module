@@ -6,13 +6,18 @@
 |Author | `Fatchip GmbH`
 |Prefix | `pi`
 |Shop Version | `CE/PE` `CE/PE/EE` `6.0.x-6.5.x`
-|Version | `6.2.2`
+|Version | `6.2.3`
 |Link | http://www.ratepay.com
 |Mail | integration@ratepay.com
 |Full Documentation | [click here](https://docs.ratepay.com/docs/developer/shop_modules/oxid/ratepay_payment_plugin_for_oxid/)|
 |Legal Disclaimer   | [click here](https://docs.ratepay.com/docs/developer/shop_modules/overview/)| 
 
 ## Changelog
+
+### Version 6.2.3 - Released 2026-06-09
+* Fix : Backend order voucher validation
+* Fix : Selected rates not showing on order page
+* Update : Security hardening
 
 ### Version 6.2.2 - Released 2024-07-04
 * Fix : DFP template inheritance
