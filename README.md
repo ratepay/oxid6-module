@@ -6,13 +6,16 @@
 |Author | `Fatchip GmbH`
 |Prefix | `pi`
 |Shop Version | `CE/PE` `CE/PE/EE` `6.0.x-6.5.x`
-|Version | `6.2.3`
+|Version | `6.2.4`
 |Link | http://www.ratepay.com
 |Mail | integration@ratepay.com
 |Full Documentation | [click here](https://docs.ratepay.com/docs/developer/shop_modules/oxid/ratepay_payment_plugin_for_oxid/)|
 |Legal Disclaimer   | [click here](https://docs.ratepay.com/docs/developer/shop_modules/overview/)| 
 
 ## Changelog
+
+### Version 6.2.4 - Released 2026-08-03
+* Fix: rounding issue when calculating total price after refunding
 
 ### Version 6.2.3 - Released 2026-06-09
 * Fix : Backend order voucher validation
