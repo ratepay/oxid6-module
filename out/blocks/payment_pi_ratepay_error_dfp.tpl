@@ -151,12 +151,12 @@
             if (typeof blInserted == 'undefined') {
                 var diSkriptVar = document.createElement('script');
                 diSkriptVar.type = 'text/javascript';
-                diSkriptVar.text =  "var blInserted = true;var di = {t:'{{ pi_ratepay_dfp_token }}',v:'{{ pi_ratepay_dfp_snippet_id }}',l:'Checkout'};";
+                diSkriptVar.text =  "var blInserted = true;var di = {t:'[{$pi_ratepay_dfp_token}]',v:'[{$pi_ratepay_dfp_snippet_id}]',l:'Checkout'};";
                 document.getElementsByTagName('head')[0].appendChild(diSkriptVar);
 
                 var diSkript = document.createElement('script');
                 diSkript.type = 'text/javascript';
-                diSkript.src = '//d.ratepay.com/{{ pi_ratepay_dfp_snippet_id }}/di.js';
+                diSkript.src = '//d.ratepay.com/[{$pi_ratepay_dfp_snippet_id}]/di.js';
                 document.getElementsByTagName('head')[0].appendChild(diSkript);
                 $.ajax({
                     type: "POST",
