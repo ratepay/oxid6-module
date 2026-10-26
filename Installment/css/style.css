@@ -75,7 +75,7 @@
 .rp-link {
     margin-left: 20px
 }
-#pi_ratepay_rate_rp-sepa-agreement, #pi_ratepay_rate0_rp-sepa-agreement {
+#pi_ratepay_rate_rp-sepa-agreement, #pi_ratepay_rate0_rp-sepa-agreement, #pi_ratepay_rate_rp-bank-agreement, #pi_ratepay_rate0_rp-bank-agreement {
     margin-left: 5px
 }
 .form-group input, .form-group label {
@@ -86,6 +86,10 @@
 }
 #pi_ratepay_rate_rp-switch-payment-type-direct-debit, #pi_ratepay_rate_rp-rate-elv, #pi_ratepay_rate0_rp-switch-payment-type-direct-debit, #pi_ratepay_rate0_rp-rate-elv {
     display: none;
+}
+#pi_ratepay_rate_rp-bank-agreement, #pi_ratepay_rate0_rp-bank-agreement {
+    display: none;
+    margin-top: 1rem;
 }
 #pi_ratepay_rate_rp-iban-account-number, #pi_ratepay_rate0_rp-iban-account-number {
     display: block;

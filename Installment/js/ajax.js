@@ -93,11 +93,13 @@ function rp_change_payment(payment, paymentMethod) {
         document.getElementById(paymentMethod + '_pi_ratepay_rate_bank_iban').style.display = 'none';
         document.getElementById(paymentMethod + '_rp-rate-elv').style.display = 'none';
         document.getElementById(paymentMethod + '_rp-switch-payment-type-direct-debit').style.display = 'block';
+        document.getElementById(paymentMethod + '_rp-bank-agreement').style.display = 'block';
         document.getElementById(paymentMethod + '_paymentFirstday').value = 2;
     } else {
         document.getElementById(paymentMethod + '_pi_ratepay_rate_bank_iban').style.display = 'block';
         document.getElementById(paymentMethod + '_rp-rate-elv').style.display = 'block';
         document.getElementById(paymentMethod + '_rp-switch-payment-type-direct-debit').style.display = 'none';
+        document.getElementById(paymentMethod + '_rp-bank-agreement').style.display = 'none';
         document.getElementById(paymentMethod + '_paymentFirstday').value = 28;
     }
     updateCalculator(paymentMethod);

@@ -167,6 +167,9 @@
                     <a class="rp-link"><?php echo $rp_switch_payment_type_direct_debit; ?></a>
                 </div>
             </div>
+            <div class="row rp-row-space rp-sepa-form" id="<?php echo $sPaymentMethod; ?>_rp-bank-agreement">
+                <?php echo $rp_bank_terms_block_21; ?>
+            </div><br/>
         <?php endif; ?>
     <?php endif; ?>
 </div>
