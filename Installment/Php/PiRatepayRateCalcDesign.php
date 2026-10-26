@@ -157,10 +157,6 @@
             </div>-->
             <div class="row rp-row-space rp-sepa-form" id="<?php echo $sPaymentMethod; ?>_rp-sepa-agreement">
                 <?php echo $rp_sepa_terms_block_21; ?>
-                <br><br>
-                <?php echo $wcd_sepa_terms_please_note . $rp_sepa_terms_block_22; ?>
-                <br/><br/>
-                <?php echo $rp_sepa_terms_block_23; ?>
             </div><br/>
         </div>
         <?php if ($sSettlementType == 'both'): ?>
