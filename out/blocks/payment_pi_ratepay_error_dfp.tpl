@@ -172,9 +172,6 @@
 function piAttachClickEvents(){
     var elements = $('input[name=paymentid]');
     $.each(elements, function( index, element ) {
-        element.addEventListener('click', piCalculator);
-    });
-    $.each(elements, function( index, element ) {
         element.addEventListener('click', piCheckFingerprint);
     });
 }
@@ -196,19 +193,6 @@ function piHide(input, elementToToggle) {
         $(elementToToggle).hide();
     });
 }
-function piCalculator() {
-    if ($('#payment_pi_ratepay_rate').is(':checked') || $('#payment_pi_ratepay_rate0').is(':checked')) {
-        var agreementCheckbox = $('#rp-sepa-aggreement');
-        agreementCheckbox.prop('checked', false);
-        $('#paymentNextStepBottom').prop('disabled', true);
-    } else if ($('#payment_pi_ratepay_elv').is(':checked')) {
-        agreementCheckbox = $('#pi_ratepay_elv_sepa_agreement_check');
-        agreementCheckbox.prop('checked', false);
-        $('#paymentNextStepBottom').prop('disabled', true);
-    } else {
-        $('#paymentNextStepBottom').prop('disabled', false);
-    }
-}
 function autoLoadPiCalculator(methodName) {
     if ($('#payment_' + methodName).is(':checked')) {
         var idPattern = methodName+'_piRpInput-buttonMonth';
@@ -223,10 +207,9 @@ function autoLoadPiCalculator(methodName) {
 }
 function checkElvForm() {
     if ($('#payment_pi_ratepay_elv').is(':checked')) {
-        var agreementCheckbox = $('#pi_ratepay_elv_sepa_agreement_check');
         var ibanField = $('#pi_ratepay_elv_bank_iban');
 
-        if (ibanField.val() !== '' && agreementCheckbox.is(':checked')) {
+        if (ibanField.val() !== '') {
             $('#paymentNextStepBottom').prop('disabled', false);
 
         } else {

@@ -95,8 +95,7 @@
                     <td>
                         <div id="pi_ratepay_elv_sepa_agreement">
                             <p>
-                                <input type="checkbox" name="pi_ratepay_elv_sepa_agreement_check" id="pi_ratepay_elv_sepa_agreement_check" onchange="checkElvForm()" class="required" />
-                                <span style="margin-left: 5px">[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PRIVACY_AGREEMENT_TEXT_1"}]</span>
+                                [{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PRIVACY_AGREEMENT_TEXT_1"}]
                             </p>
                             <p>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PRIVACY_AGREEMENT_TEXT_2"}]</p>
                         </div>

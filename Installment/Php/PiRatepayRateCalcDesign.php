@@ -156,7 +156,6 @@
                 <a class="rp-link"><?php echo $rp_sepa_link; ?></a>
             </div>-->
             <div class="row rp-row-space rp-sepa-form" id="<?php echo $sPaymentMethod; ?>_rp-sepa-agreement">
-                <input type="checkbox" name="rp-sepa-aggreement" id="<?php echo $sPaymentMethod; ?>_rp-sepa-aggreement" onchange="updateCalculator('<?php echo $sPaymentMethod; ?>')" class="required" />
                 <?php echo $rp_sepa_terms_block_21; ?>
                 <br><br>
                 <?php echo $wcd_sepa_terms_please_note . $rp_sepa_terms_block_22; ?>
