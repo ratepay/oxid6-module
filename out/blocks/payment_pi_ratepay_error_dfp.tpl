@@ -181,6 +181,14 @@ function piTogglePolicy(policy) {
         $('#policy' + policy).toggle();
     });
 }
+function piToggleSepaPolicy(paymentId) {
+    const panelHeader = document.getElementById(paymentId + '_sepa_policy_panel_title');
+    const panel = panelHeader.parentElement;
+
+    panelHeader.addEventListener('click', () => {
+        panel.classList.toggle('is-open');
+    });
+}
 
 function piShow(input, elementToToggle) {
     $(input).click(function() {

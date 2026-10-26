@@ -22,7 +22,10 @@ $piErrorBirthdayDigits = 'Geben Sie bitte Ihr Geburtsjahr vierstellig ein. (z.B.
 $aLang = [
     'charset'                                       => 'UTF-8',
     'PI_RATEPAY_ELV_VIEW_SANDBOX_NOTIFICATION'      => 'Testmodus aktiviert, bitte nutzen Sie diese Zahlart NICHT f&uuml;r die Bestellung und informieren den H&auml;ndler &uuml;ber diese Nachricht.',
-    'PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION'    => 'Mandatsreferenz und Gläubiger-ID wird Ihnen separat mitgeteilt.',
+    'PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_0'  => 'SEPA-Lastschriftmandat — Erklärung',
+    'PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_1'  => 'Indem Sie dem SEPA-Lastschriftmandat zustimmen, ermächtigen Sie die Ratepay GmbH, Zahlungen von Ihrem Konto mittels Lastschrift einzuziehen. Gleichzeitig weisen Sie Ihr Kreditinstitut an, die von der Ratepay GmbH auf Ihr Konto gezogenen Lastschriften einzulösen.',
+    'PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_2'  => '<span style="font-weight: bold">Hinweis:</span> Sie können innerhalb von acht Wochen, beginnend mit dem Belastungsdatum, die Erstattung des belasteten Betrages verlangen. Es gelten dabei die mit Ihrem Kreditinstitut vereinbarten Bedingungen.',
+    'PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_3'  => 'Die Mandatsreferenz und Gläubiger-Identifikationsnummer werden Ihnen separat mitgeteilt.',
     'PI_RATEPAY_ELV_VIEW_CREDITOR_ID_TEXT'          => 'Gl&auml;ubiger-ID',
     'PI_RATEPAY_ELV_VIEW_CREDITOR_ID_VALUE'         => 'DE39RPY00000568463',
     'PI_RATEPAY_ELV_VIEW_MANDATE_TEXT'              => 'Mandatsreferenz',

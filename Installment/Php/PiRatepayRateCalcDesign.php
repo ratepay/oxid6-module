@@ -116,9 +116,6 @@
                 </div><br>
             <?php endif; ?>
 
-            <div class="row rp-sepa-form rp-special-item rp-row-space">
-                <?php echo $rp_mand_cred_notification; ?>
-            </div>
             <br/>
             <div class="row rp-sepa-form rp-special-item rp-row-space">
                 <?php echo $wcd_sepa_notice_block; ?>
@@ -150,6 +147,26 @@
                         <input type="text" class="form-control" id="rp-bank-code" name="rp-bank-code" />
                     </div>-->
                 </form>
+            </div>
+
+            <div class="panel" id="<?php echo $sPaymentMethod; ?>_sepa_policy_panel">
+                <div class="panel-header" id="<?php echo $sPaymentMethod; ?>_sepa_policy_panel_title" onclick="rpToggleSepaPolicy('<?php echo $sPaymentMethod; ?>')">
+                    <?php echo $rp_mand_cred_notification_0; ?>
+                    <span class="panel-icon">▼</span>
+                </div>
+                <div class="panel-body-wrapper">
+                    <div class="panel-body-content">
+                        <p class="panel-text">
+                            <?php echo $rp_mand_cred_notification_1; ?>
+                        </p>
+                        <p class="panel-text">
+                            <?php echo $rp_mand_cred_notification_2; ?>
+                        </p>
+                        <p class="panel-text">
+                            <?php echo $rp_mand_cred_notification_3; ?>
+                        </p>
+                    </div>
+                </div>
             </div>
 
             <!--<div class="row rp-row-space small rp-sepa-form" id="rp-show-sepa-agreement">

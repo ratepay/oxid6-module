@@ -36,6 +36,55 @@
     display: block;
 }
 
+/* /// SEPA Mandate notice panel /// */
+#pi_ratepay_rate_sepa_policy_panel, #pi_ratepay_rate0_sepa_policy_panel {
+    max-width: 60%;
+}
+.panel {
+    width: 100%;
+    background-color: #ffffff;
+    overflow: hidden;
+    border: 1px solid #ccc;
+    margin-bottom: 16px;
+}
+.panel-header {
+    background: white;
+    padding: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+    transition: background 0.3s ease;
+    border-bottom: solid 1px #ccc;
+}
+.panel-icon {
+    font-size: 0.8rem;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.panel-body-wrapper {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.panel-body-content {
+    overflow: hidden;
+}
+.panel-text {
+    padding: 16px;
+    margin: 0;
+    font-weight: normal;
+}
+.panel.is-open .panel-body-wrapper {
+    grid-template-rows: 1fr;
+}
+.panel.is-open .panel-icon {
+    transform: rotate(180deg);
+}
+/* /// End SEPA Mandate notice panel /// */
+
 .rp-menue,
 .rp-installment-plan-details,
 .rp-installment-plan-no-details {
