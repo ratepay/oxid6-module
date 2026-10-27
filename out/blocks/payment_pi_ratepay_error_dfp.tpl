@@ -231,6 +231,9 @@ function checkSepaForm() {
         ibanField = $('#pi_ratepay_rate_pi_ratepay_rate_bank_iban');
     } else if ($('#payment_pi_ratepay_rate0').is(':checked')) {
         ibanField = $('#pi_ratepay_rate0_pi_ratepay_rate_bank_iban');
+    } else {
+        $('#paymentNextStepBottom').prop('disabled', false);
+        return;
     }
     if (ibanField && ibanField.val() !== '') {
         $('#paymentNextStepBottom').prop('disabled', false);
