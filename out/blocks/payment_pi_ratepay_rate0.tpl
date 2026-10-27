@@ -104,6 +104,7 @@
 </dl>
 
 [{oxscript add="piTogglePolicy('$sPaymentID');"}]
+[{oxscript add="piCalculator();"}]
 [{oxscript add="autoLoadPiCalculator('pi_ratepay_rate0');"}]
 [{oxscript add="$('#pi_ratepay_rate0_bank_box').hide();"}]
 [{oxscript add="piShow('#piRpRadioElv', '#pi_ratepay_rate0_bank_box');"}]

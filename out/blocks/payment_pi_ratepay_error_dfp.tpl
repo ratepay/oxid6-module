@@ -172,6 +172,9 @@
 function piAttachClickEvents(){
     var elements = $('input[name=paymentid]');
     $.each(elements, function( index, element ) {
+        element.addEventListener('click', piCalculator);
+    });
+    $.each(elements, function( index, element ) {
         element.addEventListener('click', piCheckFingerprint);
     });
 }
@@ -201,6 +204,13 @@ function piHide(input, elementToToggle) {
         $(elementToToggle).hide();
     });
 }
+function piCalculator() {
+    if ($('#payment_pi_ratepay_rechnung').is(':checked')) {
+        $('#paymentNextStepBottom').prop('disabled', false);
+    } else {
+        checkSepaForm();
+    }
+}
 function autoLoadPiCalculator(methodName) {
     if ($('#payment_' + methodName).is(':checked')) {
         var idPattern = methodName+'_piRpInput-buttonMonth';
@@ -213,16 +223,19 @@ function autoLoadPiCalculator(methodName) {
         piRatepayRateCalculatorAction('runtime', methodName, month);
     }
 }
-function checkElvForm() {
+function checkSepaForm() {
+    let ibanField;
     if ($('#payment_pi_ratepay_elv').is(':checked')) {
-        var ibanField = $('#pi_ratepay_elv_bank_iban');
-
-        if (ibanField.val() !== '') {
-            $('#paymentNextStepBottom').prop('disabled', false);
-
-        } else {
-            $('#paymentNextStepBottom').prop('disabled', true);
-        }
+        ibanField = $('#pi_ratepay_elv_bank_iban');
+    } else if ($('#payment_pi_ratepay_rate').is(':checked')) {
+        ibanField = $('#pi_ratepay_rate_pi_ratepay_rate_bank_iban');
+    } else if ($('#payment_pi_ratepay_rate0').is(':checked')) {
+        ibanField = $('#pi_ratepay_rate0_pi_ratepay_rate_bank_iban');
+    }
+    if (ibanField && ibanField.val() !== '') {
+        $('#paymentNextStepBottom').prop('disabled', false);
+    } else {
+        $('#paymentNextStepBottom').prop('disabled', true);
     }
 }
 </script>
