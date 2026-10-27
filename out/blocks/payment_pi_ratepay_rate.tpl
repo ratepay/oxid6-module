@@ -22,9 +22,6 @@
             </p>
         </div>
         [{/if}]
-        <div>
-            [{ oxmultilang ident="PI_RATEPAY_POLICY" }]
-        </div>
 
         <div class="form" style="margin-top: 15px">
             [{if isset($pi_ratepay_rate_fon_check)}]

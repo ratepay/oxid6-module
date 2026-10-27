@@ -28,30 +28,6 @@
             </p>
         </div>
         [{/if}]
-        <div>
-            [{ oxmultilang ident="PI_RATEPAY_POLICY" }]
-        </div>
-        <br/>
-
-        <div class="panel" id="[{$sPaymentID}]_sepa_policy_panel">
-            <div class="panel-header" id="[{$sPaymentID}]_sepa_policy_panel_title">
-                [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_0" }]
-                <span class="panel-icon">▼</span>
-            </div>
-            <div class="panel-body-wrapper">
-                <div class="panel-body-content">
-                    <p class="panel-text">
-                        [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_1" }]
-                    </p>
-                    <p class="panel-text">
-                        [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_2" }]
-                    </p>
-                    <p class="panel-text">
-                        [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_3" }]
-                    </p>
-                </div>
-            </div>
-        </div>
 
         <div class="form" style="margin-top: 15px">
             [{if isset($pi_ratepay_elv_fon_check)}]
@@ -101,6 +77,26 @@
                 <label class="">[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_BANK_IBAN"}]</label>
                 <input id="pi_ratepay_elv_bank_iban" name="pi_ratepay_elv_bank_iban" onchange="checkSepaForm()" maxlength='50' size='37' type="text" value="[{$pi_ratepay_elv_bank_iban}]" class="form-control required" />
             </p>
+        </div>
+
+        <div class="panel" id="[{$sPaymentID}]_sepa_policy_panel">
+            <div class="panel-header" id="[{$sPaymentID}]_sepa_policy_panel_title">
+                [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_0" }]
+                <span class="panel-icon">▼</span>
+            </div>
+            <div class="panel-body-wrapper">
+                <div class="panel-body-content">
+                    <p class="panel-text">
+                        [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_1" }]
+                    </p>
+                    <p class="panel-text">
+                        [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_2" }]
+                    </p>
+                    <p class="panel-text">
+                        [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_3" }]
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div style="margin: 15px 0;">

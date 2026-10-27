@@ -45,6 +45,7 @@
     background-color: #ffffff;
     overflow: hidden;
     border: 1px solid #ccc;
+    margin-top: 16px;
     margin-bottom: 16px;
 }
 .panel-header {

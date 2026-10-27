@@ -22,7 +22,7 @@
             </p>
         </div>
         [{/if}]
-        <div>
+        <div style="padding-top: 16px;">
             [{ oxmultilang ident="PI_RATEPAY_POLICY" }]
         </div>
 
