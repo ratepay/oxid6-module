@@ -80,7 +80,7 @@
         </div>
 
         <div class="panel" id="[{$sPaymentID}]_sepa_policy_panel">
-            <div class="panel-header" id="[{$sPaymentID}]_sepa_policy_panel_title">
+            <div class="panel-header [{if $oViewConf->getActiveTheme() == 'flow'}] panel-big-header[{/if}]" id="[{$sPaymentID}]_sepa_policy_panel_title">
                 [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_0" }]
                 <span class="panel-icon">▼</span>
             </div>

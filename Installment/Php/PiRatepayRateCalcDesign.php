@@ -150,7 +150,7 @@
             </div>
 
             <div class="panel" id="<?php echo $sPaymentMethod; ?>_sepa_policy_panel">
-                <div class="panel-header" id="<?php echo $sPaymentMethod; ?>_sepa_policy_panel_title" onclick="rpToggleSepaPolicy('<?php echo $sPaymentMethod; ?>')">
+                <div class="panel-header <?php if ($pi_calculator->getActiveTheme() == 'flow') { ?> panel-big-header<?php } ?>" id="<?php echo $sPaymentMethod; ?>_sepa_policy_panel_title" onclick="rpToggleSepaPolicy('<?php echo $sPaymentMethod; ?>')">
                     <?php echo $rp_mand_cred_notification_0; ?>
                     <span class="panel-icon">▼</span>
                 </div>

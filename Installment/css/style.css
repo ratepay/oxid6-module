@@ -38,7 +38,8 @@
 
 /* /// SEPA Mandate notice panel /// */
 #pi_ratepay_rate_sepa_policy_panel, #pi_ratepay_rate0_sepa_policy_panel {
-    max-width: 60%;
+    max-width: 82.3%;
+    margin-left: 3px;
 }
 .panel {
     width: 100%;
@@ -83,6 +84,16 @@
 }
 .panel.is-open .panel-icon {
     transform: rotate(180deg);
+}
+
+.panel-big-header {
+    font-size: 1.5rem;
+}
+
+@media (max-width: 991px) {
+    #pi_ratepay_rate_sepa_policy_panel, #pi_ratepay_rate0_sepa_policy_panel {
+        max-width: 99.3%;
+    }
 }
 /* /// End SEPA Mandate notice panel /// */
 
