@@ -184,6 +184,14 @@ function piTogglePolicy(policy) {
         $('#policy' + policy).toggle();
     });
 }
+function piToggleSepaPolicy(paymentId) {
+    const panelHeader = document.getElementById(paymentId + '_sepa_policy_panel_title');
+    const panel = panelHeader.parentElement;
+
+    panelHeader.addEventListener('click', () => {
+        panel.classList.toggle('is-open');
+    });
+}
 
 function piShow(input, elementToToggle) {
     $(input).click(function() {
@@ -197,16 +205,10 @@ function piHide(input, elementToToggle) {
     });
 }
 function piCalculator() {
-    if ($('#payment_pi_ratepay_rate').is(':checked') || $('#payment_pi_ratepay_rate0').is(':checked')) {
-        var agreementCheckbox = $('#rp-sepa-aggreement');
-        agreementCheckbox.prop('checked', false);
-        $('#paymentNextStepBottom').prop('disabled', true);
-    } else if ($('#payment_pi_ratepay_elv').is(':checked')) {
-        agreementCheckbox = $('#pi_ratepay_elv_sepa_agreement_check');
-        agreementCheckbox.prop('checked', false);
-        $('#paymentNextStepBottom').prop('disabled', true);
-    } else {
+    if ($('#payment_pi_ratepay_rechnung').is(':checked')) {
         $('#paymentNextStepBottom').prop('disabled', false);
+    } else {
+        checkSepaForm();
     }
 }
 function autoLoadPiCalculator(methodName) {
@@ -221,17 +223,22 @@ function autoLoadPiCalculator(methodName) {
         piRatepayRateCalculatorAction('runtime', methodName, month);
     }
 }
-function checkElvForm() {
+function checkSepaForm() {
+    let ibanField;
     if ($('#payment_pi_ratepay_elv').is(':checked')) {
-        var agreementCheckbox = $('#pi_ratepay_elv_sepa_agreement_check');
-        var ibanField = $('#pi_ratepay_elv_bank_iban');
-
-        if (ibanField.val() !== '' && agreementCheckbox.is(':checked')) {
-            $('#paymentNextStepBottom').prop('disabled', false);
-
-        } else {
-            $('#paymentNextStepBottom').prop('disabled', true);
-        }
+        ibanField = $('#pi_ratepay_elv_bank_iban');
+    } else if ($('#payment_pi_ratepay_rate').is(':checked')) {
+        ibanField = $('#pi_ratepay_rate_pi_ratepay_rate_bank_iban');
+    } else if ($('#payment_pi_ratepay_rate0').is(':checked')) {
+        ibanField = $('#pi_ratepay_rate0_pi_ratepay_rate_bank_iban');
+    } else {
+        $('#paymentNextStepBottom').prop('disabled', false);
+        return;
+    }
+    if (ibanField && ibanField.val() !== '') {
+        $('#paymentNextStepBottom').prop('disabled', false);
+    } else {
+        $('#paymentNextStepBottom').prop('disabled', true);
     }
 }
 </script>

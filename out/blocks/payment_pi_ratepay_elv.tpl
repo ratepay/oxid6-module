@@ -10,12 +10,12 @@
 
 <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', function(){
-        checkElvForm();
+        checkSepaForm();
     }, false);
 </script>
 <dl>
     <dt>
-        <input id="payment_[{$sPaymentID}]" type="radio" onclick="checkElvForm();" name="paymentid" value="[{$sPaymentID}]" [{if $oView->getCheckedPaymentId() == $paymentmethod->oxpayments__oxid->value}]checked[{/if}] style="position:relative;">
+        <input id="payment_[{$sPaymentID}]" type="radio" onclick="checkSepaForm();" name="paymentid" value="[{$sPaymentID}]" [{if $oView->getCheckedPaymentId() == $paymentmethod->oxpayments__oxid->value}]checked[{/if}] style="position:relative;">
         <label for="payment_[{$sPaymentID}]"><b>
                 [{$paymentmethod->oxpayments__oxdesc->value}]
         </b></label>
@@ -28,13 +28,6 @@
             </p>
         </div>
         [{/if}]
-        <div>
-            [{ oxmultilang ident="PI_RATEPAY_POLICY" }]
-        </div>
-        <br/>
-        <div style="padding-left: 4px;">
-            [{oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION"}]
-        </div>
 
         <div class="form" style="margin-top: 15px">
             [{if isset($pi_ratepay_elv_fon_check)}]
@@ -82,8 +75,28 @@
             </p>
             <p>
                 <label class="">[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_BANK_IBAN"}]</label>
-                <input id="pi_ratepay_elv_bank_iban" name="pi_ratepay_elv_bank_iban" onchange="checkElvForm()" maxlength='50' size='37' type="text" value="[{$pi_ratepay_elv_bank_iban}]" class="form-control required" />
+                <input id="pi_ratepay_elv_bank_iban" name="pi_ratepay_elv_bank_iban" onchange="checkSepaForm()" maxlength='50' size='37' type="text" value="[{$pi_ratepay_elv_bank_iban}]" class="form-control required" />
             </p>
+        </div>
+
+        <div class="panel" id="[{$sPaymentID}]_sepa_policy_panel">
+            <div class="panel-header [{if $oViewConf->getActiveTheme() == 'flow'}] panel-big-header[{/if}]" id="[{$sPaymentID}]_sepa_policy_panel_title">
+                [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_0" }]
+                <span class="panel-icon">▼</span>
+            </div>
+            <div class="panel-body-wrapper">
+                <div class="panel-body-content">
+                    <p class="panel-text">
+                        [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_1" }]
+                    </p>
+                    <p class="panel-text">
+                        [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_2" }]
+                    </p>
+                    <p class="panel-text">
+                        [{ oxmultilang ident="PI_RATEPAY_ELV_VIEW_MAND_CRED_NOTIFICATION_3" }]
+                    </p>
+                </div>
+            </div>
         </div>
 
         <div style="margin: 15px 0;">
@@ -95,10 +108,8 @@
                     <td>
                         <div id="pi_ratepay_elv_sepa_agreement">
                             <p>
-                                <input type="checkbox" name="pi_ratepay_elv_sepa_agreement_check" id="pi_ratepay_elv_sepa_agreement_check" onchange="checkElvForm()" class="required" />
-                                <span style="margin-left: 5px">[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PRIVACY_AGREEMENT_TEXT_1"}]</span>
+                                [{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PRIVACY_AGREEMENT_TEXT_1"}]
                             </p>
-                            <p>[{oxmultilang ident="PI_RATEPAY_ELV_VIEW_PRIVACY_AGREEMENT_TEXT_2"}]</p>
                         </div>
                     </td>
                 </tr>
@@ -108,6 +119,7 @@
 </dl>
 
 [{oxscript add="piTogglePolicy('$sPaymentID');"}]
+[{oxscript add="piToggleSepaPolicy('$sPaymentID');"}]
 
 [{else}]
 [{$smarty.block.parent}]

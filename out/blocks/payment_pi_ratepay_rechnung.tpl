@@ -22,9 +22,6 @@
             </p>
         </div>
         [{/if}]
-        <div>
-            [{ oxmultilang ident="PI_RATEPAY_POLICY" }]
-        </div>
 
         <div class="form" style="margin-top: 15px">
             [{if isset($pi_ratepay_rechnung_fon_check)}]
@@ -54,6 +51,10 @@
                 <input name='pi_ratepay_rechnung_ust' maxlength='255' size='37' type='text' value='' class='form-control'/>
             </p>
             [{/if}]
+        </div>
+
+        <div style="padding-top: 16px;">
+            [{ oxmultilang ident="PI_RATEPAY_POLICY" }]
         </div>
     </dd>
 </dl>

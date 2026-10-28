@@ -251,4 +251,16 @@ class PiRatepayRateCalc extends PiRatepayRateCalcBase
         $this->paymentMethod = $paymentMethod;
         $this->picalcdata->setPaymentMethod($paymentMethod);
     }
+
+    /**
+     * Retrieves the active theme currently in use by the system.
+     *
+     * @return string Returns the name of the active theme.
+     * @throws \Exception Throws an exception if the active theme cannot be determined.
+     */
+    public function getActiveTheme()
+    {
+        $viewConfig = Registry::get('oxViewConfig');
+        return $viewConfig->getActiveTheme();
+    }
 }
